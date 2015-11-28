@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>HowtvLibrary</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <!-- google material design lite -->
   <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
@@ -13,7 +13,80 @@
 </head>
 <body>
 
-<%= yield %>
+  <!-- Uses a transparent header that draws on top of the layout's background -->
+<style>
+.demo-layout-transparent {
+  background: url('../assets/demos/transparent.jpg') center / cover;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+  /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+  color: white;
+}
+</style>
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">
+        <%= link_to "Howtv Library", root_path %>
+      </span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <nav class="mdl-navigation"> <!--mdl-layout--large-screen-only-->
+        <% if user_signed_in? %>
+          <span class="mdl-navigation__link">Logged in as <strong><%= current_user.email %></strong>.</span>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:'mdl-navigation__link' %>
+        <% else %>
+          <%= link_to "ログイン", new_user_session_path, class:'mdl-navigation__link' %>
+        <% end %>
+      </nav>
+    </div>
+  </header>
+
+  <% if user_signed_in? %>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">
+      <%= link_to "Howtv Library", root_path %>
+    </span>
+    <nav class="mdl-navigation">
+      <%= link_to 'マイページ', root_path, class:'mdl-navigation__link' %>
+      <%= link_to '本を検索する', root_path, class:'mdl-navigation__link' %>
+      <%= link_to 'プロフィール変更', edit_user_registration_path, class:'mdl-navigation__link' %>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:'mdl-navigation__link' %>
+    </nav>
+  </div>
+  <% end %>
+
+  <main class="mdl-layout__content">
+    <div class="page-content"><!-- Your content goes here -->
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
+  </main>
+
+  <footer class="mdl-mini-footer">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">
+      More Information
+    </div>
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="#">Help</a></li>
+      <li><a href="#">Privacy and Terms</a></li>
+      <li><a href="#">User Agreement</a></li>
+    </ul>
+  </div>
+  <div class="mdl-mini-footer__right-section">
+    <button class="mdl-mini-footer__social-btn"></button>
+    <button class="mdl-mini-footer__social-btn"></button>
+    <button class="mdl-mini-footer__social-btn"></button>
+  </div>
+</footer>
+</div>
 
 </body>
 </html>
