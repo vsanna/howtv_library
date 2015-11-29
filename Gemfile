@@ -35,8 +35,13 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'react-rails', '~> 1.4.0'
 # https://github.com/reactjs/react-rails
 
+gem 'activeadmin', github: 'activeadmin'
+# Plus integrations with:
 gem 'devise'
-gem 'ransack'
+gem 'cancancan'
+gem 'draper'
+gem 'pundit'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -47,4 +52,6 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'pry-byebug'
 end

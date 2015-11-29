@@ -1,16 +1,26 @@
 Rails.application.routes.draw do
+  root 'pages#top'
+
+  # devise_for :users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   # 参考: http://blog.sanojimaru.com/post/18536517802/rails3-deviseで不要なアクションへのroutesを無効にする
-  devise_for :users, only: [:session, :registration] do
+  devise_for :users, only: [:session, :registration, :password] do
     get '/sign_in', :to => 'devise/sessions#new', :as => :new_user_session
-    get '/sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
-    get '/sign_out', :to => 'devise/registrations#edit', :as => :edit_user_registration
-    get '/sign_out', :to => 'devise/registrations#edit', :as => :edit_user_registration
-    patch '/sign_out', :to => 'devise/registrations#edit', :as => :edit_user_registration
-    put '/sign_out', :to => 'devise/registrations#edit', :as => :edit_user_registration
+    post '/sign_in', :to => 'devise/sessions#create', :as => :user_session
+    delete '/sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+
+    get '/edit', :to => 'devise/registrations#edit', :as => :edit_user_registration
+    patch '/', :to => 'devise/registrations#update', :as => :edit_user_registration
+    put '/', :to => 'devise/registrations#update', :as => :edit_user_registration
+
+    post '/password', :to => 'devise/passwords#create', :as => :user_password
+    get '/password', :to => 'devise/passwords#new', :as => :new_user_password
+    get '/password/edit', :to => 'devise/passwords#edit', :as => :edit_user_password
+    patch '/password', :to => 'devise/passwords#update', :as => :edit_user_password
+    put '/password', :to => 'devise/passwords#update', :as => :edit_user_password
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  root 'pages#top'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
