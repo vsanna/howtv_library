@@ -6,12 +6,12 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <!-- google material design lite -->
-  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
-  <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.1.1/material.indigo-pink.min.css">
+  <script src="https://storage.googleapis.com/code.getmdl.io/1.1.1/material.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <!-- /google material design lite -->
 </head>
-<body>
+<body class="<%= params[:controller] %>">
 
   <!-- Uses a transparent header that draws on top of the layout's background -->
 <style>
