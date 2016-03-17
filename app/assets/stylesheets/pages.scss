@@ -8,15 +8,50 @@ body.pages{
     border-radius: 5px;
     border: 1px solid #E4E4E4;
     margin-bottom: 32px;
+    .search-box--key .mdl-textfield{
+      width: 100%;
+    }
+    .search-box--tags ul {
+        padding-left: 0;
+    }
+    .search-box--submit .mdl-button {
+      width: 100%;
+      // margin-top: 32px;
+    }
   }
-  .search-box--key .mdl-textfield{
-    width: 100%;
+  .list {
+    .book-author, .book-category {
+      font-size: 0.8rem;
+    }
+    .book-title, .book-author, .book-category {
+        padding: 5px;
+        box-sizing: border-box;
+    }
+    .book-actions {
+      display: flex;
+      justify-content: space-around;
+      max-width: 200px;
+      margin: 0 auto;
+      i.material-icons {
+        font-size: 1.6rem;
+      }
+    }
   }
-  .search-box--tags ul {
-      padding-left: 0;
-  }
-  .search-box--submit .mdl-button {
-    width: 100%;
-    margin-top: 32px;
+
+
+  .right-side {
+    .new-book, .borrowing-book {
+      margin: 0;
+    }
+    .new-book .mdl-list__item,
+    .borrowing-book .mdl-list__item {
+        padding: 0;
+        margin: 0;
+        height: 52px;
+        .mdl-list__item-sub-title {
+          font-size: 0.8rem;
+          line-height: 1rem;
+        }
+    }
   }
 }

@@ -6,8 +6,6 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <!-- google material design lite -->
-  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.1.1/material.indigo-pink.min.css">
-  <script src="https://storage.googleapis.com/code.getmdl.io/1.1.1/material.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <!-- /google material design lite -->
 </head>
@@ -40,6 +38,8 @@
         <% if user_signed_in? %>
           <span class="mdl-navigation__link">Logged in as <strong><%= current_user.email %></strong>.</span>
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:'mdl-navigation__link' %>
+          <%= link_to content_tag(:i, 'settings', class:"material-icons"), "#", class:'mdl-navigation__link' %>
+          <%= link_to content_tag(:i, 'notifications', class:"material-icons"), "#", class:'mdl-navigation__link' %>
         <% else %>
           <%= link_to "ログイン", new_user_session_path, class:'mdl-navigation__link' %>
         <% end %>
@@ -72,18 +72,13 @@
   <footer class="mdl-mini-footer">
   <div class="mdl-mini-footer__left-section">
     <div class="mdl-logo">
-      More Information
+      Howtv Library
     </div>
     <ul class="mdl-mini-footer__link-list">
       <li><a href="#">Help</a></li>
       <li><a href="#">Privacy and Terms</a></li>
       <li><a href="#">User Agreement</a></li>
     </ul>
-  </div>
-  <div class="mdl-mini-footer__right-section">
-    <button class="mdl-mini-footer__social-btn"></button>
-    <button class="mdl-mini-footer__social-btn"></button>
-    <button class="mdl-mini-footer__social-btn"></button>
   </div>
 </footer>
 </div>

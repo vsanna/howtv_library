@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151128201327) do
+ActiveRecord::Schema.define(version: 20160317152241) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -27,6 +27,35 @@ ActiveRecord::Schema.define(version: 20151128201327) do
   add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+
+  create_table "books", force: :cascade do |t|
+    t.text     "isbn10"
+    t.text     "isbn13"
+    t.string   "title"
+    t.string   "author"
+    t.date     "published_at"
+    t.string   "publisher"
+    t.integer  "status",       default: 0, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "body",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rents", force: :cascade do |t|
+    t.integer  "book_id"
+    t.integer  "user_id"
+    t.date     "start_at",   null: false
+    t.date     "end_at",     null: false
+    t.date     "ended_at",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -46,6 +75,8 @@ ActiveRecord::Schema.define(version: 20151128201327) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "role",                   default: 0
+    t.string   "family_name"
+    t.string   "given_name"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

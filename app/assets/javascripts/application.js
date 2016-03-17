@@ -12,7 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require react
-//= require react_ujs
-//= require components
 //= require_tree .
+//= require material-design-lite/material.min.js
