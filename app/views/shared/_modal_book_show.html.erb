@@ -7,16 +7,18 @@
       </div>
       <div class="mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--4-phone">
         <div class="book-info--title">{{book.title}}</div>
-        <div class="book-info--author">{{book.author}}</div>
-        <div class="book-info--category">{{book.category}}</div>
-        <div class="book-info--publisher">{{book.publisher}}</div>
-        <div class="book-info--published_at">{{book.published_at}}</div>
+        <div class="book-info--text">{{book.author}}</div>
+        <div class="book-info--text">{{book.category}}</div>
+        <div class="book-info--text">{{book.publisher}}</div>
+        <div class="book-info--text">{{book.published_at}}</div>
+        <div class="book-info--text"><a v-bind:href="book.url" target="_blank">go to amazon</a></div>
       </div>
     </div>
     <div class="book-comments">
-      <div class="book-comment">ここにコメントが入ります。</div>
-      <div class="book-comment">なんとなく感想を書き残す。</div>
-      <div class="book-comment">縞模様が最高</div>
+      <div class="book-comment" v-for="c in comments">
+        <div class="book-comment--body">{{c.body}}</div>
+        <div class="book-comment--meta">{{c.user}}</div>
+      </div>
     </div>
   </div>
 </div>

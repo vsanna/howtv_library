@@ -7,7 +7,8 @@ $(() => {
       'el': $("#mypage").get(0),
       'data': {
         'showModal': false,
-        'book':{}
+        'book':{},
+        'comments':[]
       },
       'created': function(){
         console.log('vue is initialized...');
@@ -19,7 +20,8 @@ $(() => {
           this.showModal = true;
           this.getBook(id).done((data)=>{
             console.log(data);
-            this.book = data.book;
+            this.book = data.result.book;
+            this.comments = data.result.comments;
           }).fail((data)=>{
             alert('エラーが起きました。存在しない書籍です。');
           })
