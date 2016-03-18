@@ -1,0 +1,36 @@
+.modal-wrapper {
+    position: fixed;
+    /* height: 100%; */
+    top: 0;
+    bottom: 0;
+    background-color: gray;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .modal {
+        max-height: 500px;
+        max-width: 500px;
+        width: 80%;
+        background-color: #fff;
+        padding: 0 32px 16px;
+        box-sizing: border-box;
+        border-radius: 3px;
+        .modal--title {
+          margin: 0 -32px;
+          padding: 0 16px;
+          border-bottom: 1px solid #ccc;
+          line-height: 3rem;
+          font-size: 1.3rem;
+          font-weight: bold;
+          opacity: 0.7;
+        }
+        .modal--body {
+
+        }
+        .modal--footer{
+
+        }
+    }
+}

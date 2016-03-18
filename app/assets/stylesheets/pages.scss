@@ -54,4 +54,81 @@ body.pages{
         }
     }
   }
+
+  .book-borrow,
+  .book-return,
+  .book-comment,
+  .book-show {
+    .book-info {
+      .book-info--img {
+          width: 100%;
+      }
+      .book-info--title {
+          font-weight: bold;
+          margin: 0 0 10px 8px;
+          font-size: 1.2rem;
+      }
+
+      .book-info--author {
+          margin: 0 0 0px 8px;
+          font-size: 0.9rem;
+          opacity: 0.8;
+      }
+
+      .book-info--category {
+          margin: 0 0 4px 8px;
+          font-size: 0.9rem;
+          opacity: 0.8;
+      }
+      .mdl-textfield {
+          width: 100%;
+      }
+    }
+    .book-comment {
+        background-color: rgba(152, 218, 228, 0.42);
+        padding: 8px;
+        border-radius: 3px;
+        white-space: pre-line;
+        word-wrap: break-word;
+        margin-bottom: 8px;
+        position: relative;
+        &::before {
+          content: "";
+          display: block;
+          border: 9px solid transparent;
+          border-right: 5px solid rgba(152, 218, 228, 0.42);
+          position: absolute;
+          top: 2px;
+          left: -14px;
+          height: 0;
+        }
+        .book-suggest-list {
+            padding: 0;
+            margin: 0;
+            li {
+              display: block;
+              line-height: 2rem;
+              border: 1px solid #DBDBDB;
+              padding: 4px 8px;
+              background-color: #fff;
+            }
+        }
+        .mdl-textfield {
+            padding-bottom: 0;
+        }
+        .mdl-textfield__label {
+            bottom: -20px;
+        }
+    }
+    .book-actions {
+        justify-content: space-around;
+        display: flex;
+    }
+    .book-info--tags {
+        padding-left: 0;
+    }
+  }
+
+
+
 }

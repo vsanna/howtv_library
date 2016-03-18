@@ -55,3 +55,4 @@ config/secrets.yml
 .envrc
 
 node_modules/
+app/assets/javascripts/build/*

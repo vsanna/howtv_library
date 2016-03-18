@@ -8,6 +8,11 @@ class CreateBooks < ActiveRecord::Migration
       t.date :published_at
       t.string :publisher
       t.integer :status, null: false, default: 0
+      t.string :hires_image
+      t.string :large_image
+      t.text :description
+      t.text :url
+      t.string :category
       t.timestamps null: false
     end
   end

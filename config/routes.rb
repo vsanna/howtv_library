@@ -19,6 +19,13 @@ Rails.application.routes.draw do
     patch '/password', :to => 'devise/passwords#update', :as => :edit_user_password
     put '/password', :to => 'devise/passwords#update', :as => :edit_user_password
   end
+  resources :books
+
+  namespace :api, { format: 'json' } do
+    namespace :v1 do
+      resources :books, only: [:show]
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"

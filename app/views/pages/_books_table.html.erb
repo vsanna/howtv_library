@@ -6,22 +6,22 @@
     <div class="mdl-cell--2-col"></div>
   </div>
   <div class="list-body">
-    <% 3.times do %>
+    <% books.each do |b| %>
       <div class="list-item mdl-grid">
         <div class="book-title mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
           <span class="list-item--label mdl-cell--hide-desktop">タイトル</span>
-          <span class="list-item--text">[第四版]楽しいRuby Railもできる</span>
+          <span class="list-item--text"><%= b.title %></span>
         </div>
         <div class="book-author mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
           <span class="list-item--label mdl-cell--hide-desktop">著者</span>
-          <span class="list-item--text">田中田太郎</span>
+          <span class="list-item--text"><%= b.author %></span>
         </div>
         <div class="book-category mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
           <span class="list-item--label mdl-cell--hide-desktop">カテゴリ</span>
-          <span class="list-item--text">ビジネス, PC</span>
+          <span class="list-item--text">未取得</span>
         </div>
         <div class="book-actions mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-          <button class="mdl-button mdl-js-button mdl-button--icon">
+          <button class="mdl-button mdl-js-button mdl-button--icon" v-on:click="showBook(<%= b.id %>)">
             <i class="material-icons">zoom_out_map</i>
           </button>
           <button class="mdl-button mdl-js-button mdl-button--icon">

@@ -3,7 +3,7 @@
 <head>
   <title>HowtvLibrary</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <!-- google material design lite -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -37,9 +37,9 @@
       <nav class="mdl-navigation"> <!--mdl-layout--large-screen-only-->
         <% if user_signed_in? %>
           <span class="mdl-navigation__link">Logged in as <strong><%= current_user.email %></strong>.</span>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:'mdl-navigation__link' %>
           <%= link_to content_tag(:i, 'settings', class:"material-icons"), "#", class:'mdl-navigation__link' %>
           <%= link_to content_tag(:i, 'notifications', class:"material-icons"), "#", class:'mdl-navigation__link' %>
+          <%= link_to content_tag(:i, 'exit_to_app', class:"material-icons"), destroy_user_session_path, method: :delete, class:'mdl-navigation__link'%>
         <% else %>
           <%= link_to "ログイン", new_user_session_path, class:'mdl-navigation__link' %>
         <% end %>

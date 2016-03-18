@@ -1,0 +1,22 @@
+<div class="modal book-show">
+  <div class="modal--title">本をみる</div>
+  <div class="modal--body">
+    <div class="book-info mdl-grid">
+      <div class="mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--4-phone">
+        <img v-bind:src="book.image" alt="" class="book-info--img">
+      </div>
+      <div class="mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--4-phone">
+        <div class="book-info--title">{{book.title}}</div>
+        <div class="book-info--author">{{book.author}}</div>
+        <div class="book-info--category">{{book.category}}</div>
+        <div class="book-info--publisher">{{book.publisher}}</div>
+        <div class="book-info--published_at">{{book.published_at}}</div>
+      </div>
+    </div>
+    <div class="book-comments">
+      <div class="book-comment">ここにコメントが入ります。</div>
+      <div class="book-comment">なんとなく感想を書き残す。</div>
+      <div class="book-comment">縞模様が最高</div>
+    </div>
+  </div>
+</div>

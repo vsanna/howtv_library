@@ -10,7 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require_tree .
-//= require material-design-lite/material.min.js
+// webpackに従い、main.jsで各jsを読込 -> build/main.jsに書き出し -> このmanifestで読込
+//
+//= require build/main

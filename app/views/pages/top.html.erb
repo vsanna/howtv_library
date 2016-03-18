@@ -1,81 +1,84 @@
-<div class="container">
-  <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--4-phone">
-      <div class="search-box">
-        <div class="search-box--key">
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" id="search-key">
-            <label class="mdl-textfield__label" for="search-key">書籍名, 著者名, 出版社名など. OR検索です。</label>
+<div id="mypage">
+  <div class="container">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--4-phone">
+        <div class="search-box">
+          <div class="search-box--key">
+            <div class="mdl-textfield mdl-js-textfield">
+              <input class="mdl-textfield__input" type="text" id="search-key">
+              <label class="mdl-textfield__label" for="search-key">書籍名, 著者名, 出版社名など. OR検索です。</label>
+            </div>
+          </div>
+          <!-- <div class="search-box--tags">
+            <ul>
+              <li class="tag tag--md active">ビジネス</li>
+              <li class="tag tag--md">ビジネス</li>
+              <li class="tag tag--md">ビジネス</li>
+              <li class="tag tag--md">ビジネス</li>
+              <li class="tag tag--md">ビジネス</li>
+              <li class="tag tag--md">ビジネス</li>
+              <li class="tag tag--md">ビジネス</li>
+              <li class="tag tag--md">ビジネス</li>
+              <li class="tag tag--md">ビジネス</li>
+              <li class="tag tag--md">ビジネス</li>
+            </ul>
+          </div> -->
+          <div class="search-box--submit">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+              検索
+            </button>
           </div>
         </div>
-        <!-- <div class="search-box--tags">
-          <ul>
-            <li class="tag tag--md active">ビジネス</li>
-            <li class="tag tag--md">ビジネス</li>
-            <li class="tag tag--md">ビジネス</li>
-            <li class="tag tag--md">ビジネス</li>
-            <li class="tag tag--md">ビジネス</li>
-            <li class="tag tag--md">ビジネス</li>
-            <li class="tag tag--md">ビジネス</li>
-            <li class="tag tag--md">ビジネス</li>
-            <li class="tag tag--md">ビジネス</li>
-            <li class="tag tag--md">ビジネス</li>
-          </ul>
-        </div> -->
-        <div class="search-box--submit">
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-            検索
-          </button>
+        <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+          <div class="mdl-tabs__tab-bar">
+              <a href="#all" class="mdl-tabs__tab is-active">全ての書籍</a>
+              <a href="#stocked" class="mdl-tabs__tab">ストックした書籍</a>
+          </div>
+          <div class="mdl-tabs__panel is-active" id="all">
+            <%= render partial:'books_table', locals:{books: @books} %>
+          </div>
+          <div class="mdl-tabs__panel" id="stocked">
+            <%#= render 'books_table' %>
+          </div>
         </div>
-      </div>
-      <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-        <div class="mdl-tabs__tab-bar">
-            <a href="#all" class="mdl-tabs__tab is-active">全ての書籍</a>
-            <a href="#stocked" class="mdl-tabs__tab">ストックした書籍</a>
-        </div>
-        <div class="mdl-tabs__panel is-active" id="all">
-          <%= render 'books_table' %>
-        </div>
-        <div class="mdl-tabs__panel" id="stocked">
-          <%= render 'books_table' %>
-        </div>
-      </div>
 
-    </div>
-    <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-phone right-side">
-      <div class="panel">
-        <h2 class="panel--title">新刊</h2>
-        <ul class="new-book mdl-list">
-          <li class="mdl-list__item mdl-list__item--two-line">
-            <span class="mdl-list__item-primary-content">
-              <span>書籍タイトル</span>
-              <span class="mdl-list__item-sub-title">カテゴリ / 著者名</span>
-            </span>
-            <span class="mdl-list__item-secondary-content">
-              <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-            </span>
-          </li>
-        </ul>
       </div>
-      <div class="panel">
-        <h2 class="panel--title">借りている書籍</h2>
-        <ul class="borrowing-book mdl-list">
-          <li class="mdl-list__item">
-            <span class="mdl-list__item-primary-content">
-              <span>書籍タイトル</span>
-            </span>
-            <span class="mdl-list__item-secondary-content">
-              <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">reply</i></a>
-            </span>
-          </li>
-        </ul>
+      <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-phone right-side">
+        <div class="panel">
+          <h2 class="panel--title">新刊</h2>
+          <ul class="new-book mdl-list">
+            <li class="mdl-list__item mdl-list__item--two-line">
+              <span class="mdl-list__item-primary-content">
+                <span>書籍タイトル</span>
+                <span class="mdl-list__item-sub-title">カテゴリ / 著者名</span>
+              </span>
+              <span class="mdl-list__item-secondary-content">
+                <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+              </span>
+            </li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h2 class="panel--title">借りている書籍</h2>
+          <ul class="borrowing-book mdl-list">
+            <li class="mdl-list__item">
+              <span class="mdl-list__item-primary-content">
+                <span>書籍タイトル</span>
+              </span>
+              <span class="mdl-list__item-secondary-content">
+                <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">reply</i></a>
+              </span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="overall">
-  <div class="panel">
-    hoge
+  <div class="modal-wrapper" v-show="showModal">
+    <%= render 'shared/modal_book_show' %>
+    <%= render 'shared/modal_book_borrow' %>
+    <%= render 'shared/modal_book_return' %>
+    <%= render 'shared/modal_book_comment' %>
   </div>
 </div>
