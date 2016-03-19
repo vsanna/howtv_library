@@ -1,24 +1,55 @@
-<div class="modal book-show">
-  <div class="modal--title">本をみる</div>
-  <div class="modal--body">
-    <div class="book-info mdl-grid">
-      <div class="mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--4-phone">
-        <img v-bind:src="book.image" alt="" class="book-info--img">
-      </div>
-      <div class="mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--4-phone">
-        <div class="book-info--title">{{book.title}}</div>
-        <div class="book-info--text">{{book.author}}</div>
-        <div class="book-info--text">{{book.category}}</div>
-        <div class="book-info--text">{{book.publisher}}</div>
-        <div class="book-info--text">{{book.published_at}}</div>
-        <div class="book-info--text"><a v-bind:href="book.url" target="_blank">go to amazon</a></div>
-      </div>
+<book-viewer inline-template>
+  <div class="modal book-show" v-show="showViewer">
+    <div class="modal--title">
+      本をみる
+      <span class="close-modal" v-on:click="toggleModal">
+        <button class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons">close</i>
+        </button>
+      </span>
     </div>
-    <div class="book-comments">
-      <div class="book-comment" v-for="c in comments">
-        <div class="book-comment--body">{{c.body}}</div>
-        <div class="book-comment--meta">{{c.user}}</div>
+    <div class="modal--body">
+      <div class="book-info mdl-grid">
+        <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--4-phone">
+          <img v-bind:src="book.image" alt="" class="book-info--img">
+        </div>
+        <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--4-phone">
+          <div class="book-info--title">{{book.title}}</div>
+          <div class="book-info--text">{{book.author}}</div>
+          <div class="book-info--text">{{book.category}}</div>
+          <div class="book-info--text">{{book.publisher}}</div>
+          <div class="book-info--text">{{book.published_at}}</div>
+          <div class="book-info--text"><a v-bind:href="book.url" target="_blank">go to amazon</a></div>
+        </div>
       </div>
+      <!-- <div class="book-comments">
+        <div class="book-comment" v-for="c in comments">
+          <div class="book-comment--body">{{c.body}}</div>
+          <div class="book-comment--meta">{{c.user}}</div>
+        </div>
+      </div> -->
+      <ul class="book-comments mdl-list">
+        <li class="book-comment mdl-list__item mdl-list__item--three-line" v-for="c in comments">
+          <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-avatar">person</i>
+            <span class="mdl-list__item-text-body">{{c.body}}</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div class="modal--footer mdl-grid">
+      <button class="book-button book-button--comment">
+        <i class="material-icons">comment</i>
+        <span class="button-label">コメント</span>
+      </button>
+      <button class="book-button book-button--stock">
+        <i class="material-icons">star</i>
+        <span class="button-label">ストック</span>
+      </button>
+      <button class="book-button book-button--borrow book-button--colored" v-bind:disabled="b.status != 1">
+        <i class="material-icons">done</i>
+        <span class="button-label">借りる</span>
+      </button>
     </div>
   </div>
-</div>
+<book-viewer>

@@ -23,7 +23,8 @@ Rails.application.routes.draw do
 
   namespace :api, { format: 'json' } do
     namespace :v1 do
-      resources :books, only: [:show]
+      resources :books, constraints: {id: /\d*/}, only: [:show]
+      get '/books/index_or_search', to: 'books#index_or_search'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

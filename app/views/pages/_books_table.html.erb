@@ -1,37 +1,44 @@
 <div class="list">
   <div class="mdl-grid list-header mdl-cell--hide-tablet mdl-cell--hide-phone">
-    <div class="mdl-cell--6-col">タイトル</div>
-    <div class="mdl-cell--2-col">著者</div>
-    <div class="mdl-cell--2-col">カテゴリ</div>
-    <div class="mdl-cell--2-col"></div>
+    <div class="mdl-cell mdl-cell--5-col">タイトル</div>
+    <div class="mdl-cell mdl-cell--2-col">著者</div>
+    <div class="mdl-cell mdl-cell--2-col">カテゴリ</div>
+    <div class="mdl-cell mdl-cell--2-col"></div>
   </div>
   <div class="list-body">
-    <% books.each do |b| %>
-      <div class="list-item mdl-grid">
-        <div class="book-title mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-          <span class="list-item--label mdl-cell--hide-desktop">タイトル</span>
-          <span class="list-item--text"><%= b.title %></span>
-        </div>
-        <div class="book-author mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-          <span class="list-item--label mdl-cell--hide-desktop">著者</span>
-          <span class="list-item--text"><%= b.author %></span>
-        </div>
-        <div class="book-category mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-          <span class="list-item--label mdl-cell--hide-desktop">カテゴリ</span>
-          <span class="list-item--text">未取得</span>
-        </div>
-        <div class="book-actions mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-          <button class="mdl-button mdl-js-button mdl-button--icon" v-on:click="showBook(<%= b.id %>)">
-            <i class="material-icons">zoom_out_map</i>
-          </button>
-          <button class="mdl-button mdl-js-button mdl-button--icon">
-            <i class="material-icons">star</i>
-          </button>
-          <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
-            <i class="material-icons">shopping_cart</i>
-          </button>
-        </div>
+    <div class="list-item mdl-grid" v-for="b in books">
+      <div class="mdl-cell mdl-cell--5-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+        <span class="list-item--label mdl-cell--hide-desktop">タイトル</span>
+        <span class="list-item--text">{{b.title}}</span>
       </div>
-    <% end %>
+      <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+        <span class="list-item--label mdl-cell--hide-desktop">著者</span>
+        <span class="list-item--text">{{ b.author }}</span>
+      </div>
+      <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+        <span class="list-item--label mdl-cell--hide-desktop">カテゴリ</span>
+        <span class="list-item--text">未取得</span>
+      </div>
+      <div class="book-actions mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+        <button class="mdl-button mdl-js-button mdl-button--icon" v-on:click="showBook(b.id)" id="view-{{b.id}}">
+          <i class="material-icons">zoom_out_map</i>
+        </button>
+        <div class="mdl-tooltip" for="view-{{b.id}}">{{b.comment_num}}</div>
+        <button class="mdl-button mdl-js-button mdl-button--icon" id='favorite-{{b.id}}'>
+          <i class="material-icons">star</i>
+        </button>
+        <div class="mdl-tooltip" for="favorite-{{b.id}}">comming soon...</div>
+        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="rent-{{b.id}}" v-on:click="openRentalBox(b.id)">
+          <i class="material-icons">shopping_cart</i>
+        </button>
+        <div class="mdl-tooltip" for="rent-{{b.id}}" v-bind:disabled="b.status != 1">{{b.status_i18n}}</div>
+      </div>
+    </div>
   </div>
 </div>
+
+<button type="button" name="button"
+        class="mdl-button mdl-button--raised read-more"
+        v-on:click="readMore()"
+        v-bind:disabled="loading"
+        v-show="has_next">もっと見る</button>

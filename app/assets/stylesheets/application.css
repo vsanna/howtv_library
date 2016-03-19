@@ -11,6 +11,13 @@
  * file per style scope.
  *
  *= require material-design-lite/material.min.css
- *= require_tree .
+ *= require commons/variables
+ *= require commons/animations
+ *= require commons/commons
+ *= require commons/tags
+ *= require commons/modal
+ *= require layout
+ *= require books
+ *= require pages
  *= require_self
  */

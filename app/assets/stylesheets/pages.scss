@@ -1,8 +1,6 @@
-// Place all the styles related to the Pages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 body.pages{
+
+
   .search-box {
     padding: 16px 32px;
     border-radius: 5px;
@@ -19,13 +17,11 @@ body.pages{
       // margin-top: 32px;
     }
   }
+
+
   .list {
-    .book-author, .book-category {
-      font-size: 0.8rem;
-    }
-    .book-title, .book-author, .book-category {
-        padding: 5px;
-        box-sizing: border-box;
+    .list-body > div {
+      font-size: 0.9rem;
     }
     .book-actions {
       display: flex;
@@ -36,6 +32,10 @@ body.pages{
         font-size: 1.6rem;
       }
     }
+  }
+  .read-more {
+    width: 100%;
+    margin: 16px 0;
   }
 
 
@@ -53,6 +53,9 @@ body.pages{
           line-height: 1rem;
         }
     }
+    .mdl-list__item-primary-content {
+        font-size: 1rem;
+    }
   }
 
   .book-borrow,
@@ -60,17 +63,20 @@ body.pages{
   .book-comment,
   .book-show {
     .book-info {
+      padding: 0;
+      margin-right: -8px;
+      margin-left: -8px;
       .book-info--img {
-          width: 100%;
+        max-width: 100%;
+        max-height: 200px;
+        margin: 0 auto;
+        display: block;
       }
       .book-info--title {
           font-weight: bold;
-          margin: 0 0 10px 16px;
           font-size: 1.2rem;
       }
-
       .book-info--text {
-          margin: 0 0 0px 16px;
           font-size: 0.9rem;
           opacity: 0.8;
       }
@@ -78,55 +84,104 @@ body.pages{
           width: 100%;
       }
     }
-    .book-comment {
-        background-color: rgba(152, 218, 228, 0.42);
-        padding: 8px;
-        border-radius: 3px;
-        word-wrap: break-word;
-        margin-bottom: 8px;
-        position: relative;
-        &::before {
-          content: "";
-          display: block;
-          border: 9px solid transparent;
-          border-right: 5px solid rgba(152, 218, 228, 0.42);
-          position: absolute;
-          top: 2px;
-          left: -14px;
-          height: 0;
-        }
-        .book-comment--meta {
-            text-align: right;
-            font-size: 0.8rem;
-            opacity: 0.6;
-        }
-        .book-suggest-list {
-            padding: 0;
-            margin: 0;
-            li {
-              display: block;
-              line-height: 2rem;
-              border: 1px solid #DBDBDB;
-              padding: 4px 8px;
-              background-color: #fff;
-            }
-        }
-        .mdl-textfield {
-            padding-bottom: 0;
-        }
-        .mdl-textfield__label {
-            bottom: -20px;
-        }
-    }
-    .book-actions {
-        justify-content: space-around;
-        display: flex;
-    }
     .book-info--tags {
         padding-left: 0;
     }
+    .book-button {
+      background-color: #fff;
+      border: none;
+      box-sizing: border-box;
+      outline: none;
+      transition: opacity 0.3s;
+      height: 52px;
+      &:hover {
+          cursor: pointer;
+          opacity: 0.6;
+          transition: opacity 0.3s;
+      }
+      .material-icons {
+        font-size: 1.7rem;
+        display: block;
+        margin-top: -6px;
+        margin-bottom: 10px;
+      }
+      .button-label {
+          display: block;
+          font-size: 0.7rem;
+          line-height: 0px;
+      }
+      &.book-button--comment {
+          width: 25%;
+          border-radius: 0 0 0 3px;
+      }
+      &.book-button--stock {
+          width: 25%;
+      }
+      &.book-button--borrow {
+        width: 50%;
+        border-radius: 0 0 3px 0;
+      }
+      &.book-button--cancel {
+          width: calc(100% / 3);
+          border-radius: 0 0 0 3px;
+      }
+
+      &.book-button--ok {
+          width: calc( 100% * 2 / 3);
+          border-radius: 0 0 3px 0;
+      }
+      &.book-button--colored {
+        background-color: #4452BA;
+        color: #fff;
+        &:hover {
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+      }
+      &[disabled] {
+          background-color: #B1B1B1 !important;
+          &:hover {
+              cursor: auto !important;
+              opacity: 1 !important;
+          }
+      }
+    }
+
   }
 
+  .book-show {
+    .book-comments {
+      margin: 16px 0 0 0;
+      padding: 0;
+      .mdl-list__item-avatar {
+          width: 30px;
+          height: 30px;
+          font-size: 2rem;
+          text-align: center;
+      }
+      .mdl-list__item-primary-content,
+      .mdl-list__item-text-body,
+      .mdl-list__item {
+          height: initial !important;
+      }
+      .mdl-list__item {
+          padding: 0;
+          margin-bottom: 16px;
+      }
+      .mdl-list__item-text-body {
+          margin-left: 46px;
+          background-color: rgba(212, 212, 212, 0.4);
+          padding: 4px 6px !important;
+          border-radius: 3px;
+      }
+    }
+    &.modal .modal--body {
+      height: calc(100% - 43px - 52px) !important;
+    }
+    .modal--footer {
+      padding: 0;
+    }
+  }
 
 
 }

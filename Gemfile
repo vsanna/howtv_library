@@ -32,15 +32,20 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'react-rails', '~> 1.4.0'
-# https://github.com/reactjs/react-rails
-
 gem 'activeadmin', github: 'activeadmin'
 # Plus integrations with:
 gem 'devise'
 gem 'cancancan'
 gem 'draper'
 gem 'pundit'
+
+gem 'ransack'
+gem 'config' # 設定ファイルを簡単に用意
+gem 'will_paginate'
+gem 'slack-api'
+gem 'whenever'
+gem 'enum_help'
+
 
 
 group :development, :test do

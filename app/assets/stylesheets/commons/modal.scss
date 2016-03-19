@@ -1,9 +1,12 @@
+@import 'variables';
+
 .modal-wrapper {
     position: fixed;
-    /* height: 100%; */
+    z-index: 10;
+    margin-top: 56px;
     top: 0;
     bottom: 0;
-    background-color: gray;
+    background-color: rgba(50,50,50,0.6);
     left: 0;
     right: 0;
     display: flex;
@@ -14,23 +17,35 @@
         max-width: 500px;
         width: 80%;
         background-color: #fff;
-        padding: 0 32px 16px;
         box-sizing: border-box;
         border-radius: 3px;
         .modal--title {
-          margin: 0 -32px;
-          padding: 0 16px;
-          border-bottom: 1px solid #ccc;
+          @media #{$width-mobile}{ padding: 0 16px; }
+          @media #{$width-not-mobile}{ padding: 0 32px; }
+          border-bottom: 1px solid #E8E6E6;
           line-height: 3rem;
           font-size: 1.3rem;
           font-weight: bold;
           opacity: 0.7;
+          .close-modal {
+              float: right;
+              .material-icons {
+                   font-size: 0.9rem;
+              }
+          }
         }
         .modal--body {
-
+          max-height: 350px;
+          height: calc(100% - 43px - 40px);
+          overflow: scroll;
+          @media #{$width-mobile}{ padding: 0 16px; }
+          @media #{$width-not-mobile}{ padding: 0 32px; }
         }
-        .modal--footer{
-
+        .modal--footer {
+            padding: 0;
+            border-top: 1px solid #E8E6E6;
+            margin-top: -1px;
+            border-radius: 0 0 3px 3px;
         }
     }
 }

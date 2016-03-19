@@ -8,12 +8,13 @@ json.result do
     json.image book_image(@book)
     json.description @book.description
     json.url @book.url
+    json.status @book.status
   end
   json.comments do
     json.array! @comments do |c|
       json.body c.body
       json.created_at c.created_at.strftime("%Y.%m.%d")
-      json.user "#{c.user.family_name} #{c.user.given_name}氏"
+      json.image_url c.user.image_url
     end
   end
 end

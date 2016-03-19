@@ -5,8 +5,8 @@
         <div class="search-box">
           <div class="search-box--key">
             <div class="mdl-textfield mdl-js-textfield">
-              <input class="mdl-textfield__input" type="text" id="search-key">
-              <label class="mdl-textfield__label" for="search-key">書籍名, 著者名, 出版社名など. OR検索です。</label>
+              <input class="mdl-textfield__input" type="text" id="search-key" v-model="query.search_key">
+              <label class="mdl-textfield__label" for="search-key">書籍名, 著者名, 出版社名</label>
             </div>
           </div>
           <!-- <div class="search-box--tags">
@@ -24,7 +24,7 @@
             </ul>
           </div> -->
           <div class="search-box--submit">
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" v-on:click="search()">
               検索
             </button>
           </div>
@@ -35,10 +35,10 @@
               <a href="#stocked" class="mdl-tabs__tab">ストックした書籍</a>
           </div>
           <div class="mdl-tabs__panel is-active" id="all">
-            <%= render partial:'books_table', locals:{books: @books} %>
+            <%= render 'books_table' %>
           </div>
           <div class="mdl-tabs__panel" id="stocked">
-            <%#= render 'books_table' %>
+            <span class="comming-soon">commin soon...</span>
           </div>
         </div>
 
@@ -47,20 +47,23 @@
         <div class="panel">
           <h2 class="panel--title">新刊</h2>
           <ul class="new-book mdl-list">
-            <li class="mdl-list__item mdl-list__item--two-line">
-              <span class="mdl-list__item-primary-content">
-                <span>書籍タイトル</span>
-                <span class="mdl-list__item-sub-title">カテゴリ / 著者名</span>
-              </span>
-              <span class="mdl-list__item-secondary-content">
-                <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-              </span>
-            </li>
+            <% @new_books.each do |nb| %>
+              <li class="mdl-list__item mdl-list__item--two-line">
+                <span class="mdl-list__item-primary-content">
+                  <span><%= nb.title %></span>
+                  <span class="mdl-list__item-sub-title"><%= book_author nb %> / <%= book_category nb %></span>
+                </span>
+                <span class="mdl-list__item-secondary-content">
+                  <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                </span>
+              </li>
+            <% end %>
           </ul>
         </div>
         <div class="panel">
           <h2 class="panel--title">借りている書籍</h2>
-          <ul class="borrowing-book mdl-list">
+          <span class="comming-soon">commin soon...</span>
+          <!-- <ul class="borrowing-book mdl-list">
             <li class="mdl-list__item">
               <span class="mdl-list__item-primary-content">
                 <span>書籍タイトル</span>
@@ -69,16 +72,22 @@
                 <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">reply</i></a>
               </span>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </div>
   </div>
 
-  <div class="modal-wrapper" v-show="showModal">
-    <%= render 'shared/modal_book_show' %>
+<style media="screen">
+.v-showModal-enter{
+  animation: toggle-show 0.3s;
+}
+.v-showModal-leave{
+  animation: toggle-hide 0.3s;
+}
+</style>
+  <div class="modal-wrapper" v-show="showModal" transition="v-showModal">
     <%= render 'shared/modal_book_borrow' %>
-    <%= render 'shared/modal_book_return' %>
-    <%= render 'shared/modal_book_comment' %>
+    <%= render 'shared/modal_book_show' %>
   </div>
 </div>
