@@ -3,6 +3,7 @@ var Vue = require('vue');
 var BookViewer = require('./bookViewer.jsx');
 var BookRentalBox = require('./bookRentalBox.jsx');
 var BookComment = require('./bookComment.jsx');
+var BookReturnBox = require('./bookReturnBox.jsx');
 
 $(() => {
   var getBooks = (page, query)=>{
@@ -32,19 +33,29 @@ $(() => {
     });
   }
 
+  var returnBook = (id)=>{
+    return $.ajax({
+      'type': 'POST',
+      'url': '/api/v1/books/' + String(id) + '/return',
+      'dataType': 'json',
+    });
+  }
+
   if ( $('body').is('.pages') ){
     var mypage =  new Vue({
-      'el': $("#mypage").get(0),
+      'el': $("#main").get(0),
       'components':{
         'book-viewer': BookViewer,
         'book-rental-box': BookRentalBox,
         'book-comment': BookComment,
+        'book-return-box': BookReturnBox,
       },
       'data': {
         'showModal': false,
         'showViewer': false,
         'showRentalBox': false,
         'showComment': false,
+        'showReturnBox': false,
         'currentBookId': null,
         'loading': false,
         'book': {},
@@ -109,6 +120,15 @@ $(() => {
             alert('エラーが起きました。存在しない書籍です。');
           })
         },
+        'returnBook': function(id){
+          returnBook(id).done((data)=>{
+            alert(data.message);
+            this.hideModal();
+            location.reload();
+          }).fail(()=>{
+            alert('エラーが起きました。存在しない書籍です。');
+          })
+        },
         'openViewer': function(id){
           this.showModal = true;
           this.showViewer = true;
@@ -117,6 +137,11 @@ $(() => {
         'openRentalBox': function(id){
           this.showModal = true;
           this.showRentalBox = true;
+          this.getBook(id);
+        },
+        'openReturnBox': function(id){
+          this.showModal = true;
+          this.showReturnBox = true;
           this.getBook(id);
         },
         'openComment': function(id){
@@ -130,6 +155,7 @@ $(() => {
           this.showModal = false;
           this.showViewer = false;
           this.showRentalBox = false;
+          this.showReturnBox = false;
           this.showComment = false;
         }
       },
@@ -146,6 +172,9 @@ $(() => {
         },
         'borrow-book': function(id){
           this.borrowBook(id);
+        },
+        'return-book': function(id){
+          this.returnBook(id);
         }
       }
     })

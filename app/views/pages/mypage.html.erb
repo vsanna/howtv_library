@@ -1,0 +1,24 @@
+<div id="mypage">
+  <div class="container">
+    <div class="title-section">
+      <h1 class="title-section--title">マイページ</h1>
+      <%= link_to "本を探すに戻る", root_path, class: "title-section--link" %>
+    </div>
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+      <div class="mdl-tabs__tab-bar">
+          <a href="#rentings" class="mdl-tabs__tab is-active">借りている書籍一覧</a>
+          <a href="#rents" class="mdl-tabs__tab">レンタル履歴</a>
+          <a href="#comments" class="mdl-tabs__tab">コメント履歴</a>
+      </div>
+      <div class="mdl-tabs__panel is-active" id="rentings">
+        <%= render 'books_in_use_table' %>
+      </div>
+      <div class="mdl-tabs__panel" id="rents">
+        <%= render 'books_history_table' %>
+      </div>
+      <div class="mdl-tabs__panel" id="comments">
+        <%= render 'comments_history_table' %>
+      </div>
+    </div>
+  </div>
+</div>

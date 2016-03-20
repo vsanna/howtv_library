@@ -1,0 +1,5 @@
+slack:
+  token: <%= ENV["SLACK_TOKEN"] %>
+  channel:
+    test: <%= ENV["SLACK_TEST"] %>
+    production: <%= ENV["SLACK_TEST"] %>

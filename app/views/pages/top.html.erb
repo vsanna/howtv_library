@@ -1,5 +1,8 @@
-<div id="mypage">
+<div id="main">
   <div class="container">
+    <div class="title-section">
+      <h1 class="title-section--title">本を探す</h1>
+    </div>
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--4-phone">
         <div class="search-box">
@@ -53,8 +56,14 @@
                   <span><%= truncate(nb.title, length:25) %></span>
                   <span class="mdl-list__item-sub-title"><%= book_author nb %> / <%= book_category nb %></span>
                 </span>
-                <span class="mdl-list__item-secondary-content">
-                  <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                <span class="mdl-list__item-secondary-content two-buttons two-buttons">
+                  <button class="mdl-button mdl-js-button mdl-button--icon" v-on:click="openViewer(<%= nb.id %>)">
+                    <i class="material-icons">zoom_out_map</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon" id="newbook-<%= nb.id %>">
+                    <i class="material-icons">star</i>
+                  </button>
+                  <div class="mdl-tooltip" for="newbook-<%= nb.id %>">comming soon...</div>
                 </span>
               </li>
             <% end %>
@@ -62,18 +71,23 @@
         </div>
         <div class="panel">
           <h2 class="panel--title">借りている書籍</h2>
-          <span class="comming-soon">commin soon...</span>
           <ul class="borrowing-book mdl-list">
-            <% @rent_books.each do |rb| %>
-              <li class="mdl-list__item mdl-list__item--two-line">
-                <span class="mdl-list__item-primary-content">
-                  <span><%= truncate(rb.book.title, length: 25) %></span>
-                  <span class="mdl-list__item-sub-title">返 : <%= calc_rent_days(rb) %></span>
-                </span>
-                <span class="mdl-list__item-secondary-content">
-                  <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">reply</i></a>
-                </span>
-              </li>
+            <% if @rent_books.count > 0 %>
+              <% @rent_books.each do |rb| %>
+                <li class="mdl-list__item mdl-list__item--two-line">
+                  <span class="mdl-list__item-primary-content">
+                    <span><%= truncate(rb.book.title, length: 25) %></span>
+                    <span class="mdl-list__item-sub-title">返 : <%= calc_rent_days(rb) %></span>
+                  </span>
+                  <span class="mdl-list__item-secondary-content">
+                    <button class="mdl-button mdl-js-button mdl-button--icon" v-on:click="openReturnBox(<%= rb.book.id %>)">
+                      <i class="material-icons">reply</i>
+                    </button>
+                  </span>
+                </li>
+              <% end %>
+            <% else %>
+              <span class="comming-soon">現在借りている書籍はありません</span>
             <% end %>
           </ul>
         </div>
@@ -90,6 +104,7 @@
 }
 </style>
   <div class="modal-wrapper" v-show="showModal" transition="v-showModal">
+    <%= render 'shared/modal_book_return' %>
     <%= render 'shared/modal_book_comment' %>
     <%= render 'shared/modal_book_borrow' %>
     <%= render 'shared/modal_book_show' %>

@@ -16,8 +16,10 @@
  *= require commons/commons
  *= require commons/tags
  *= require commons/modal
+ *= require commons/request
  *= require layout
  *= require books
  *= require pages
+ *= require users/sessions
  *= require_self
  */

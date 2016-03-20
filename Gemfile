@@ -40,7 +40,10 @@ gem 'draper'
 gem 'pundit'
 
 gem 'ransack'
+
 gem 'config' # 設定ファイルを簡単に用意
+gem 'dotenv-rails'
+
 gem 'will_paginate'
 gem 'slack-api'
 gem 'whenever'

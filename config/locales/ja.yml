@@ -213,3 +213,9 @@ ja:
         before_shelf: 貸出前
         in_shelf: 貸出ok
         in_use: 貸出中
+    request:
+      request_type:
+        book_request: 書籍リクエスト
+        bug_report: バグ報告
+        idea: 機能アイデア
+        thanks: ねぎらい

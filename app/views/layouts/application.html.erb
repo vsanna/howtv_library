@@ -10,22 +10,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <!-- /google material design lite -->
 </head>
-<body class="<%= params[:controller] %>">
-
-  <!-- Uses a transparent header that draws on top of the layout's background -->
-<style>
-.demo-layout-transparent {
-  background: url('../assets/demos/transparent.jpg') center / cover;
-}
-.demo-layout-transparent .mdl-layout__header,
-.demo-layout-transparent .mdl-layout__drawer-button {
-  /* This background is dark, so we set text to white. Use 87% black instead if
-     your background is light. */
-  color: white;
-}
-</style>
+<body class="<%= params[:controller].split('/').last %> <%= params[:action] %>">
 <!-- Always shows a header, even in smaller screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <% if !hide_header %>
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
@@ -37,50 +25,79 @@
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation"> <!--mdl-layout--large-screen-only-->
         <% if user_signed_in? %>
-          <%= link_to content_tag(:i, 'settings', class:"material-icons"), "#", class:'mdl-navigation__link' %>
-          <%= link_to content_tag(:i, 'notifications', class:"material-icons"), "#", class:'mdl-navigation__link' %>
-          <%= link_to content_tag(:i, 'exit_to_app', class:"material-icons"), destroy_user_session_path, method: :delete, class:'mdl-navigation__link'%>
+          <%= link_to content_tag(:i, 'settings', class:"material-icons"), passwords_edit_path, class:'mdl-navigation__link', id:"account" %>
+          <div class="mdl-tooltip" for="account">change password and email</div>
+          <%= link_to content_tag(:i, 'notifications', class:"material-icons"), "#", class:'mdl-navigation__link', id:"notification" %>
+          <div class="mdl-tooltip" for="notification">通知欲しいですか？</div>
+          <%= link_to content_tag(:i, 'exit_to_app', class:"material-icons"), sign_out_path, method: :delete, class:'mdl-navigation__link', id:"signout"%>
+          <div class="mdl-tooltip" for="signout">sign out</div>
         <% else %>
-          <%= link_to "ログイン", new_user_session_path, class:'mdl-navigation__link' %>
+          <%= link_to "ログイン", sign_in_path, class:'mdl-navigation__link', id:"signin" %>
+          <div class="mdl-tooltip" for="signin">sign in</div>
         <% end %>
       </nav>
     </div>
   </header>
-
+  <% end %>
   <% if user_signed_in? %>
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">
       <%= link_to "Howtv Library", root_path %>
     </span>
     <nav class="mdl-navigation">
-      <%= link_to 'マイページ', root_path, class:'mdl-navigation__link' %>
-      <%= link_to '本を検索する', root_path, class:'mdl-navigation__link' %>
-      <%= link_to 'アカウント設定', edit_user_registration_path, class:'mdl-navigation__link' %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:'mdl-navigation__link' %>
+      <%= link_to 'マイページ', mypage_path, class:'mdl-navigation__link' %>
+      <%= link_to '本を探す', root_path, class:'mdl-navigation__link' %>
+      <%= link_to 'アカウント設定', passwords_edit_path, class:'mdl-navigation__link' %>
+      <%= link_to "ログアウト", sign_out_path, method: :delete, class:'mdl-navigation__link' %>
     </nav>
   </div>
   <% end %>
 
   <main class="mdl-layout__content">
     <div class="page-content"><!-- Your content goes here -->
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <% if !notice.nil? %>
+        <div class="notice notice-box">
+          <div class="container"><%= notice %></div>
+        </div>
+      <% end %>
+      <% if !alert.nil? %>
+        <div class="alert notice-box">
+          <div class="container"><%= alert %></div>
+        </div>
+      <% end %>
       <%= yield %>
     </div>
+    
+    <% if !hide_header %>
+      <div id="request" v-bind:class="{'close': !showRequest}">
+        <div class="panel">
+          <h2 class="panel--title">
+            リクエスト
+            <span class="close-request">
+              <button class="mdl-button mdl-js-button mdl-button--icon" v-on:click="toggleRequest()">
+                <i class="material-icons">close</i>
+              </button>
+            </span>
+          </h2>
+          <div class="panel--form">
+            <div class="mdl-textfield mdl-js-textfield">
+              <select class="mdl-textfield__input" v-model="query.type">
+                <option value="1">書籍のリクエスト</option>
+                <option value="2">バグ報告</option>
+                <option value="3">機能アイデア</option>
+                <option value="4">ねぎらい</option>
+              </select>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield">
+              <textarea class="mdl-textfield__input" type="text" rows= "3" id="request-text" v-model="query.body"></textarea>
+              <label class="mdl-textfield__label" for="request-text">Text lines...</label>
+            </div>
+            <button class="mdl-button submit" v-bind:disabled="!query.body" v-on:click="sendRequest">{{(!query.body) ? 'コメントを入力' : '送信'}}</button>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </main>
-
-  <footer class="mdl-mini-footer">
-  <div class="mdl-mini-footer__left-section">
-    <div class="mdl-logo">
-      Howtv Library
-    </div>
-    <ul class="mdl-mini-footer__link-list">
-      <li><a href="#">Help</a></li>
-      <li><a href="#">Privacy and Terms</a></li>
-      <li><a href="#">User Agreement</a></li>
-    </ul>
-  </div>
-</footer>
 </div>
 
 </body>

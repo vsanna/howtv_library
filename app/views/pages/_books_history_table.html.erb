@@ -1,0 +1,30 @@
+<div class="list book-history">
+  <div class="mdl-grid list-header mdl-cell--hide-tablet mdl-cell--hide-phone">
+    <div class="mdl-cell mdl-cell--6-col">タイトル</div>
+    <div class="mdl-cell mdl-cell--2-col">著者</div>
+    <div class="mdl-cell mdl-cell--2-col">カテゴリ</div>
+    <div class="mdl-cell mdl-cell--2-col">借りた日</div>
+  </div>
+  <div class="list-body">
+    <% @my_rent_history.each do |r| %>
+      <div class="list-item mdl-grid">
+        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <span class="list-item--label mdl-cell--hide-desktop">タイトル</span>
+          <span class="list-item--text"><%= r.book.title %></span>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <span class="list-item--label mdl-cell--hide-desktop">著者</span>
+          <span class="list-item--text"><%= book_author r.book %></span>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <span class="list-item--label mdl-cell--hide-desktop">カテゴリ</span>
+          <span class="list-item--text"><%= book_category r.book %></span>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <span class="list-item--label mdl-cell--hide-desktop">借りた日</span>
+          <span class="list-item--text"><%= r.start_at.strftime("%Y.%m.%d") %></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

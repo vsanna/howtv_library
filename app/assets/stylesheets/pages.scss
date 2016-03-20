@@ -1,6 +1,4 @@
 body.pages{
-
-
   .search-box {
     padding: 16px 32px;
     border-radius: 5px;
@@ -54,6 +52,10 @@ body.pages{
     }
     .mdl-list__item-primary-content {
         font-size: 1rem;
+    }
+    .mdl-list__item-secondary-content.two-buttons {
+        display: inline-block;
+        min-width: 70px;
     }
   }
 
@@ -218,6 +220,27 @@ body.pages{
         }
     }
   }
+}
 
 
+
+body.pages.mypage{
+  .comment-history,
+  .book-history {
+    margin-bottom: 32px;
+  }
+  .due-tag {
+    display: inline-block;
+    margin-left: 8px;
+    &.before-due {
+      opacity: 0.6;
+    }
+    &.on-the-due {
+      font-weight: bold;
+    }
+    &.after-due {
+      color: #CD3030;
+      font-weight: bold;
+    }
+  }
 }

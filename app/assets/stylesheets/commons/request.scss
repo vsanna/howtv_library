@@ -1,0 +1,31 @@
+#request {
+    width: 300px;
+    position: fixed;
+    right: 8px;
+    bottom: 0;
+    z-index: 100;
+    margin-bottom: 8px;
+    transition: bottom 0.3s;
+    &.close {
+        bottom: calc(-277px + 37px);
+        transition: bottom 0.3s;
+        .close-request {
+            transform: rotate(45deg);
+        }
+    }
+    .close-request {
+        float: right;
+        .material-icons {
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+    }
+    .panel {
+        margin-bottom: 0;
+        height: 260px;
+        background-color: #fff;
+    }
+    .submit {
+        width: 100%;
+    }
+}

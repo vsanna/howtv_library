@@ -1,19 +1,36 @@
-<div class="modal book-return" style="display:none">
-  <div class="modal--title">本を返す</div>
-  <div class="modal--body">
-    <div class="book-info mdl-grid">
-      <div class="mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--4-phone">
-        <img src="https://thumbsplus.tutsplus.com/uploads/users/30/posts/24633/preview_image/mdl-cards.png?height=300&amp;width=300" alt="" class="book-info--img">
-      </div>
-      <div class="mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--4-phone">
-        <div class="book-info--title">書籍名書籍名書籍名書籍名書籍名書籍名書籍名書籍名</div>
-        <div class="book-info--author">田中 太郎</div>
-        <div class="book-info--category">PC, ビジネス</div>
+<book-return-box inline-template v-bind:book="book" v-bind:show-return-box="showReturnBox">
+  <div class="modal book-return" v-show="showReturnBox">
+    <div class="modal--title">
+      本を返す
+      <span class="close-modal">
+        <button class="mdl-button mdl-js-button mdl-button--icon" v-on:click="toggleModal">
+          <i class="material-icons">close</i>
+        </button>
+      </span>
+    </div>
+    <div class="modal--body">
+      <div class="book-info mdl-grid">
+        <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--4-phone">
+          <img src="https://thumbsplus.tutsplus.com/uploads/users/30/posts/24633/preview_image/mdl-cards.png?height=300&amp;width=300" alt="" class="book-info--img">
+        </div>
+        <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--4-phone">
+          <div class="book-info--title">{{book.title}}</div>
+          <div class="book-info--text">{{book.author}}</div>
+          <div class="book-info--text">{{book.category}}</div>
+          <div class="book-info--text">{{book.publisher}}</div>
+          <div class="book-info--text">{{book.published_at}}</div>
+        </div>
       </div>
     </div>
-    <div class="book-actions">
-      <button type="button" name="button" class="mdl-button">返す</button>
-      <button type="button" name="button" class="mdl-button">キャンセル</button>
+    <div class="modal--footer mdl-grid">
+      <button class="book-button book-button--cancel" v-on:click="toggleModal">
+        <i class="material-icons">close</i>
+        <span class="button-label">閉じる</span>
+      </button>
+      <button class="book-button book-button--ok book-button--colored" v-on:click="returnBook()">
+        <i class="material-icons">reply</i>
+        <span class="button-label">返却する</span>
+      </button>
     </div>
   </div>
-</div>
+</book-return-box>

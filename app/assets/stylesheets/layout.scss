@@ -8,6 +8,42 @@ layoutに関わるパーツを記述
     width: 90%;
 }
 
+// 各ページのタイトル
+.title-section {
+    margin: 0;
+    border-bottom: 1px solid #ECECEC;
+    padding: 8px 0;
+    margin-bottom: 32px;
+    position:relative;
+    .title-section--title {
+        font-size: 2rem;
+        margin:0;
+    }
+    .title-section--link {
+        position: absolute;
+        right: 0;
+        bottom: 8px;
+        color: inherit;
+        opacity: 0.5;
+        font-size: 0.8rem;
+    }
+}
+
+// notice, alertのボックス
+.notice-box {
+  padding: 12px 0;
+  font-size: 1.2rem;
+  &.alert {
+    background-color: #F07575;
+    color: #fff;
+  }
+  &.notice {
+    background-color: #69AAC9;
+    color: #fff;
+  }
+}
+
+// ベーシックな枠
 .panel {
   padding: 0px 16px 8px;
   border-radius: 5px;
@@ -24,6 +60,7 @@ layoutに関わるパーツを記述
   }
 }
 
+// 同じ形式のものを繰り返すときに使用
 .list {
   border: 1px solid #E4E4E4;
   .list-header {

@@ -4,28 +4,31 @@ Rails.application.routes.draw do
   # devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # 参考: http://blog.sanojimaru.com/post/18536517802/rails3-deviseで不要なアクションへのroutesを無効にする
-  devise_for :users, only: [:session, :registration, :password] do
-    get '/sign_in', :to => 'devise/sessions#new', :as => :new_user_session
-    post '/sign_in', :to => 'devise/sessions#create', :as => :user_session
-    delete '/sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  devise_scope :user do
+    get '/sign_in', :to => 'users/sessions#new'
+    post '/sign_in', :to => 'users/sessions#create'
+    get '/sign_out', :to => 'users/sessions#destroy'
 
-    get '/edit', :to => 'devise/registrations#edit', :as => :edit_user_registration
-    patch '/', :to => 'devise/registrations#update', :as => :edit_user_registration
-    put '/', :to => 'devise/registrations#update', :as => :edit_user_registration
-
-    post '/password', :to => 'devise/passwords#create', :as => :user_password
-    get '/password', :to => 'devise/passwords#new', :as => :new_user_password
-    get '/password/edit', :to => 'devise/passwords#edit', :as => :edit_user_password
-    patch '/password', :to => 'devise/passwords#update', :as => :edit_user_password
-    put '/password', :to => 'devise/passwords#update', :as => :edit_user_password
+    get '/passwords/edit', :to => 'users/registrations#edit'
+    patch '/passwords/update', :to => 'users/registrations#update'
   end
+
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    # passwords: 'users/passwords',
+    registrations: 'users/registrations'
+  }
+
   resources :books
+  get '/mypage', to: 'pages#mypage'
 
   namespace :api, { format: 'json' } do
     namespace :v1 do
       resources :books, constraints: {id: /\d*/}, only: [:show]
       get '/books/index_or_search', to: 'books#index_or_search'
       post '/books/:id/borrow', to: 'books#borrow'
+      post '/books/:id/return', to: 'books#return'
+      post '/request', to: 'requests#create'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
