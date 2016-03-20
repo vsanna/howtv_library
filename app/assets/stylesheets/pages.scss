@@ -47,7 +47,6 @@ body.pages{
     .borrowing-book .mdl-list__item {
         padding: 0;
         margin: 0;
-        height: 52px;
         .mdl-list__item-sub-title {
           font-size: 0.8rem;
           line-height: 1rem;
@@ -180,6 +179,43 @@ body.pages{
     }
     .modal--footer {
       padding: 0;
+    }
+  }
+
+  .book-comment {
+    .book-info--title {
+        font-size: 1rem !important;
+    }
+    .tag-input {
+        padding: 0;
+        margin-bottom: 5px;
+        .mdl-textfield__label {
+            top: 4px;
+            &::after {
+                bottom: 0;
+            }
+        }
+    }
+    .comment-input {
+        padding: 0;
+        margin-top: 16px;
+        .mdl-textfield__label {
+          top: inherit;
+          ::after {
+              bottom: 0 !important;
+          }
+        }
+    }
+    .book-suggest-list {
+        margin: -5px 0 0 0;
+        padding: 0;
+        display: block;
+        & > li {
+            display: block;
+            border-bottom: 1px solid #fff;
+            background-color: #EFEFEF;
+            padding: 2px 8px;
+        }
     }
   }
 

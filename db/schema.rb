@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20160319122107) do
     t.integer  "user_id"
     t.date     "start_at",   null: false
     t.date     "end_at",     null: false
-    t.date     "ended_at",   null: false
+    t.date     "ended_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

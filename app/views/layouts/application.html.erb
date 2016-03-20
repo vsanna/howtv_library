@@ -37,7 +37,6 @@
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation"> <!--mdl-layout--large-screen-only-->
         <% if user_signed_in? %>
-          <span class="mdl-navigation__link">Logged in as <strong><%= current_user.email %></strong>.</span>
           <%= link_to content_tag(:i, 'settings', class:"material-icons"), "#", class:'mdl-navigation__link' %>
           <%= link_to content_tag(:i, 'notifications', class:"material-icons"), "#", class:'mdl-navigation__link' %>
           <%= link_to content_tag(:i, 'exit_to_app', class:"material-icons"), destroy_user_session_path, method: :delete, class:'mdl-navigation__link'%>

@@ -50,7 +50,7 @@
             <% @new_books.each do |nb| %>
               <li class="mdl-list__item mdl-list__item--two-line">
                 <span class="mdl-list__item-primary-content">
-                  <span><%= nb.title %></span>
+                  <span><%= truncate(nb.title, length:25) %></span>
                   <span class="mdl-list__item-sub-title"><%= book_author nb %> / <%= book_category nb %></span>
                 </span>
                 <span class="mdl-list__item-secondary-content">
@@ -63,16 +63,19 @@
         <div class="panel">
           <h2 class="panel--title">借りている書籍</h2>
           <span class="comming-soon">commin soon...</span>
-          <!-- <ul class="borrowing-book mdl-list">
-            <li class="mdl-list__item">
-              <span class="mdl-list__item-primary-content">
-                <span>書籍タイトル</span>
-              </span>
-              <span class="mdl-list__item-secondary-content">
-                <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">reply</i></a>
-              </span>
-            </li>
-          </ul> -->
+          <ul class="borrowing-book mdl-list">
+            <% @rent_books.each do |rb| %>
+              <li class="mdl-list__item mdl-list__item--two-line">
+                <span class="mdl-list__item-primary-content">
+                  <span><%= truncate(rb.book.title, length: 25) %></span>
+                  <span class="mdl-list__item-sub-title">返 : <%= calc_rent_days(rb) %></span>
+                </span>
+                <span class="mdl-list__item-secondary-content">
+                  <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">reply</i></a>
+                </span>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
@@ -87,6 +90,7 @@
 }
 </style>
   <div class="modal-wrapper" v-show="showModal" transition="v-showModal">
+    <%= render 'shared/modal_book_comment' %>
     <%= render 'shared/modal_book_borrow' %>
     <%= render 'shared/modal_book_show' %>
   </div>

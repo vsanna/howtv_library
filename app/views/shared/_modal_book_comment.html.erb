@@ -1,45 +1,61 @@
-<div class="modal book-comment" style="display:none">
-  <div class="modal--title">コメントを残す</div>
-  <div class="modal--body">
-    <div class="book-info mdl-grid">
-      <div class="mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--4-phone">
-        <img src="https://thumbsplus.tutsplus.com/uploads/users/30/posts/24633/preview_image/mdl-cards.png?height=300&amp;width=300" alt="" class="book-info--img">
-      </div>
-      <div class="mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--4-phone">
-        <div class="book-info--title">書籍名書籍名書籍名書籍名書籍名書籍名書籍名書籍名</div>
-        <div class="book-info--author">田中 太郎</div>
-        <div class="book-info--category">PC, ビジネス</div>
-      </div>
+<book-comment inline-template v-bind:book="book" v-bind:show-comment="showComment">
+  <div class="modal book-comment" v-show="showComment">
+    <div class="modal--title">
+      コメントを残す
+      <span class="close-modal" v-on:click="toggleModal">
+        <button class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons">close</i>
+        </button>
+      </span>
     </div>
-    <div class="book-info">
-      <form action="#">
-        <div class="mdl-textfield mdl-js-textfield">
-          <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" ></textarea>
-          <label class="mdl-textfield__label" for="sample5">最高にcool</label>
+    <div class="modal--body">
+      <div class="book-info mdl-grid">
+        <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--4-phone">
+          <img src="https://thumbsplus.tutsplus.com/uploads/users/30/posts/24633/preview_image/mdl-cards.png?height=300&amp;width=300" alt="" class="book-info--img">
         </div>
-        <div>
+        <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--4-phone">
+          <div class="book-info--title">{{book.title}}</div>
+          <div class="book-info--text">{{book.author}}</div>
+          <div class="book-info--text">{{book.category}}</div>
+          <div class="book-info--text">{{book.publisher}}</div>
+          <div class="book-info--text">{{book.published_at}}</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <form action="#">
           <ul class="book-info--tags">
             <li class="tag">ruby</li>
             <li class="tag">エクセルの次の本</li>
             <li class="tag">エクセルの次の本</li>
             <li class="tag">エクセルの次の本</li>
           </ul>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield">
-          <input class="mdl-textfield__input" type="text" id="sample1">
-          <label class="mdl-textfield__label" for="sample1">Text...</label>
-        </div>
-        <ul class="book-suggest-list">
-          <li>ruby</li>
-          <li>エクセルの次の本</li>
-          <li>エクセルの次の本</li>
-          <li>エクセルの次の本</li>
-        </ul>
-      </form>
+          <div class="tag-input mdl-textfield mdl-js-textfield is-upgraded">
+            <input class="mdl-textfield__input" type="text" id="tag-input">
+            <label class="mdl-textfield__label" for="tag-input">タグをつける</label>
+          </div>
+          <ul class="book-suggest-list">
+            <li>ruby</li>
+            <li>エクセルの次の本</li>
+            <li>エクセルの次の本</li>
+            <li>エクセルの次の本</li>
+          </ul>
+          <div class="comment-input mdl-textfield mdl-js-textfield is-upgraded">
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="comment-input"></textarea>
+            <label class="mdl-textfield__label" for="comment-input">感想をのこす</label>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="book-actions">
-      <button type="button" name="button" class="mdl-button">ok</button>
-      <button type="button" name="button" class="mdl-button">skip</button>
+    <div class="modal--footer mdl-grid">
+      <button class="book-button book-button--cancel" v-on:click="toggleModal">
+        <i class="material-icons">close</i>
+        <span class="button-label">閉じる</span>
+      </button>
+      <button class="book-button book-button--ok book-button--colored">
+        <i class="material-icons">done</i>
+        <span class="button-label">送信する</span>
+      </button>
     </div>
   </div>
-</div>
+
+</book-comment>

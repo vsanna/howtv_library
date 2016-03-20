@@ -1,4 +1,4 @@
-<book-viewer inline-template>
+<book-viewer inline-template v-bind:book="book" v-bind:comments="comments" v-bind:show-viewer="showViewer">
   <div class="modal book-show" v-show="showViewer">
     <div class="modal--title">
       本をみる
@@ -38,15 +38,16 @@
       </ul>
     </div>
     <div class="modal--footer mdl-grid">
-      <button class="book-button book-button--comment">
+      <button class="book-button book-button--comment" v-on:click="openComment()">
         <i class="material-icons">comment</i>
         <span class="button-label">コメント</span>
       </button>
-      <button class="book-button book-button--stock">
+      <button class="book-button book-button--stock" v-on:click="stock()" id="book_stock_in_viewer">
         <i class="material-icons">star</i>
         <span class="button-label">ストック</span>
       </button>
-      <button class="book-button book-button--borrow book-button--colored" v-bind:disabled="b.status != 1">
+      <div class="mdl-tooltip" for="book_stock_in_viewer">comming soon...</div>
+      <button class="book-button book-button--borrow book-button--colored" v-bind:disabled="book.status != 0" v-on:click="borrow()">
         <i class="material-icons">done</i>
         <span class="button-label">借りる</span>
       </button>

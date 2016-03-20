@@ -1,20 +1,20 @@
 .tag {
-    display: inline-block;
-    background-color: #E4E4E4;
-    border-radius: 2px;
-    padding: 0 8px;
-    font-size: 0.9rem;
-    margin-right: 2px;
-    margin-bottom: 4px;
-    transition: background-color 0.3s;
-}
+  display: inline-block;
+  background-color: #E4E4E4;
+  border-radius: 2px;
+  padding: 0 4px;
+  font-size: 0.8rem;
+  margin-right: 2px;
+  margin-bottom: 4px;
+  transition: background-color 0.3s;
+  line-height: 1.6rem;
+  &:hover {
+      background-color: #B9D9F5;
+      transition: 0.3s;
+  }
+  &.active {
+      background-color: #5994C7;
+      color: #fff;
+  }
 
-.tag:hover {
-    background-color: #B9D9F5;
-    transition: 0.3s;
-}
-
-li.tag.active {
-    background-color: #5994C7;
-    color: #fff;
 }

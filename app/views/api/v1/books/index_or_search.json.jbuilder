@@ -5,7 +5,7 @@ json.books do
     json.author book_author b
     json.category book_category b
     json.comment_num book_comment_num b
-    json.status b.status
+    json.status Book.statuses[b.status]
     json.status_i18n b.status_i18n
   end
 end

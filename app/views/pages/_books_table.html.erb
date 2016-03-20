@@ -20,7 +20,7 @@
         <span class="list-item--text">未取得</span>
       </div>
       <div class="book-actions mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-        <button class="mdl-button mdl-js-button mdl-button--icon" v-on:click="showBook(b.id)" id="view-{{b.id}}">
+        <button class="mdl-button mdl-js-button mdl-button--icon" v-on:click="openViewer(b.id)" id="view-{{b.id}}">
           <i class="material-icons">zoom_out_map</i>
         </button>
         <div class="mdl-tooltip" for="view-{{b.id}}">{{b.comment_num}}</div>
@@ -28,10 +28,10 @@
           <i class="material-icons">star</i>
         </button>
         <div class="mdl-tooltip" for="favorite-{{b.id}}">comming soon...</div>
-        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="rent-{{b.id}}" v-on:click="openRentalBox(b.id)">
+        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="rent-{{b.id}}" v-on:click="openRentalBox(b.id)" v-bind:disabled="(b.status != 0) || (book.id != undefined && b.id == book.id && book.status != 0)">
           <i class="material-icons">shopping_cart</i>
         </button>
-        <div class="mdl-tooltip" for="rent-{{b.id}}" v-bind:disabled="b.status != 1">{{b.status_i18n}}</div>
+        <div class="mdl-tooltip" for="rent-{{b.id}}">{{b.status_i18n}}</div>
       </div>
     </div>
   </div>

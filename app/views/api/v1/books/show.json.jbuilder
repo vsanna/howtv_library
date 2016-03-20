@@ -1,5 +1,6 @@
 json.result do
   json.book do
+    json.id @book.id
     json.title @book.title
     json.author @book.author
     json.category @book.category
@@ -8,7 +9,7 @@ json.result do
     json.image book_image(@book)
     json.description @book.description
     json.url @book.url
-    json.status @book.status
+    json.status Book.statuses[@book.status]
   end
   json.comments do
     json.array! @comments do |c|

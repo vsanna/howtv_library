@@ -2,6 +2,7 @@ var $ = require('jquery');
 var Vue = require('vue');
 var BookViewer = require('./bookViewer.jsx');
 var BookRentalBox = require('./bookRentalBox.jsx');
+var BookComment = require('./bookComment.jsx');
 
 $(() => {
   var getBooks = (page, query)=>{
@@ -15,6 +16,21 @@ $(() => {
       }
     });
   }
+  var getBook = (id)=>{
+    return $.ajax({
+      'type': 'GET',
+      'url': '/api/v1/books/' + String(id),
+      'dataType': 'json',
+    });
+  }
+
+  var borrowBook = (id)=>{
+    return $.ajax({
+      'type': 'POST',
+      'url': '/api/v1/books/' + String(id) + '/borrow',
+      'dataType': 'json',
+    });
+  }
 
   if ( $('body').is('.pages') ){
     var mypage =  new Vue({
@@ -22,11 +38,17 @@ $(() => {
       'components':{
         'book-viewer': BookViewer,
         'book-rental-box': BookRentalBox,
+        'book-comment': BookComment,
       },
       'data': {
         'showModal': false,
-        'viewingBookId': 1,
+        'showViewer': false,
+        'showRentalBox': false,
+        'showComment': false,
+        'currentBookId': null,
         'loading': false,
+        'book': {},
+        'comments':[],
         'books': [],
         'page': 1,
         'total': 0,
@@ -39,18 +61,7 @@ $(() => {
         this.getBooks();
       },
       'methods': {
-        'toggleModal':function(){
-          this.showModal = !this.showModal;
-        },
-        'showBook': function(id){
-          this.viewingBookId = id;
-          this.$broadcast('get-book', id); // 子孫方向にイベントを発信
-          this.toggleModal();
-        },
-        'openRentalBox': function(id){
-          this.$broadcast('open-rental-box', id); // 子孫方向にイベントを発信
-          this.toggleModal();
-        },
+        // 検索周り
         'readMore': function(){
           this.loading = true;
           this.getBooks();
@@ -59,6 +70,9 @@ $(() => {
           this.books = [];
           this.page = 1;
           this.getBooks();
+        },
+        'hasNext': function(left_count){
+          this.has_next = (left_count > 0) ? true : false;
         },
         'getBooks': function(){
           getBooks(this.page, this.query).done((data)=>{
@@ -72,13 +86,66 @@ $(() => {
             this.loading = false;
           })
         },
-        'hasNext': function(left_count){
-          this.has_next = (left_count > 0) ? true : false;
+
+        // modalまわり
+        'getBook': function(id){
+          if (this.currentBookId == id){ return; }
+          this.book = {}; // clear
+          getBook(id).done((data)=>{
+            this.currentBookId = data.result.book.id;
+            this.book = data.result.book;
+            this.comments = data.result.comments;
+          }).fail(()=>{
+            alert('エラーが起きました。存在しない書籍です。');
+          })
+        },
+        'borrowBook': function(id){
+          borrowBook(id).done((data)=>{
+            alert(data.message);
+            this.currentBookId = null; // 再読み込み
+            this.getBook(id);
+            this.hideModal();
+          }).fail(()=>{
+            alert('エラーが起きました。存在しない書籍です。');
+          })
+        },
+        'openViewer': function(id){
+          this.showModal = true;
+          this.showViewer = true;
+          this.getBook(id);
+        },
+        'openRentalBox': function(id){
+          this.showModal = true;
+          this.showRentalBox = true;
+          this.getBook(id);
+        },
+        'openComment': function(id){
+          this.showModal = true;
+          this.showComment = true;
+          this.getBook(id);
+        },
+        'stockBook': function(id){
+        },
+        'hideModal': function(){
+          this.showModal = false;
+          this.showViewer = false;
+          this.showRentalBox = false;
+          this.showComment = false;
         }
       },
       'events' : {
         'hide-modal': function () {
-          this.showModal = false;
+          this.hideModal();
+        },
+        'get-book': function(id){
+          this.getBook(id);
+        },
+        'open-comment': function(id){
+          this.hideModal();
+          this.openComment(id);
+        },
+        'borrow-book': function(id){
+          this.borrowBook(id);
         }
       }
     })

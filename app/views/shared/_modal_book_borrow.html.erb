@@ -1,4 +1,4 @@
-<book-rental-box inline-template>
+<book-rental-box inline-template v-bind:book="book" v-bind:show-rental-box="showRentalBox">
   <div class="modal book-borrow" v-show="showRentalBox">
     <div class="modal--title">
       本を借りる
@@ -21,11 +21,11 @@
       </div>
     </div>
     <div class="modal--footer mdl-grid">
-      <button class="book-button book-button--cancel">
+      <button class="book-button book-button--cancel" v-on:click="toggleModal">
         <i class="material-icons">close</i>
         <span class="button-label">閉じる</span>
       </button>
-      <button class="book-button book-button--ok book-button--colored">
+      <button class="book-button book-button--ok book-button--colored" v-bind:disabled="book.status != 0" v-on:click="borrowBook(book.id)">
         <i class="material-icons">done</i>
         <span class="button-label">借りる</span>
       </button>
