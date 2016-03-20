@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <!-- /google material design lite -->
 </head>
-<body class="<%= params[:controller].split('/').last %> <%= params[:action] %>">
+<body class="<%= params[:controller].split('/').first %> <%= params[:controller].split('/').last %> <%= params[:action] %>">
 <!-- Always shows a header, even in smaller screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <% if !hide_header %>
@@ -49,6 +49,9 @@
       <%= link_to '本を探す', root_path, class:'mdl-navigation__link' %>
       <%= link_to 'アカウント設定', passwords_edit_path, class:'mdl-navigation__link' %>
       <%= link_to "ログアウト", sign_out_path, method: :delete, class:'mdl-navigation__link' %>
+      <% if current_user.admin? %>
+        <%= link_to "管理画面", admin_root_path, method: :delete, class:'mdl-navigation__link' %>
+      <% end %>
     </nav>
   </div>
   <% end %>
@@ -67,7 +70,7 @@
       <% end %>
       <%= yield %>
     </div>
-    
+
     <% if !hide_header %>
       <div id="request" v-bind:class="{'close': !showRequest}">
         <div class="panel">

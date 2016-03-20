@@ -17,6 +17,8 @@
  *= require commons/tags
  *= require commons/modal
  *= require commons/request
+ *= require admin/pages
+ *= require admin/books
  *= require layout
  *= require books
  *= require pages

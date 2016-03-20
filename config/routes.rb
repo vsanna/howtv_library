@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'pages#top'
 
   # devise_for :users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+  # ActiveAdmin.routes(self)
   # 参考: http://blog.sanojimaru.com/post/18536517802/rails3-deviseで不要なアクションへのroutesを無効にする
   devise_scope :user do
     get '/sign_in', :to => 'users/sessions#new'
@@ -19,7 +19,12 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :books
+  namespace :admin do
+    # get '/', to: 'pages#top'
+    root 'pages#top'
+    resources :books
+  end
+
   get '/mypage', to: 'pages#mypage'
 
   namespace :api, { format: 'json' } do

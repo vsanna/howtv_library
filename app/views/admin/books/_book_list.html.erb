@@ -1,0 +1,45 @@
+<div class="list">
+  <div class="mdl-grid list-header mdl-cell--hide-tablet mdl-cell--hide-phone">
+    <div class="mdl-cell mdl-cell--4-col">タイトル</div>
+    <div class="mdl-cell mdl-cell--2-col">著者</div>
+    <div class="mdl-cell mdl-cell--2-col">カテゴリ</div>
+    <div class="mdl-cell mdl-cell--2-col">ステータス</div>
+    <div class="mdl-cell mdl-cell--2-col"></div>
+  </div>
+  <div class="list-body">
+    <% books.each do |b| %>
+      <div class="list-item mdl-grid">
+        <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <span class="list-item--label mdl-cell--hide-desktop">タイトル</span>
+          <span class="list-item--text"><%= b.title %></span>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <span class="list-item--label mdl-cell--hide-desktop">著者</span>
+          <span class="list-item--text"><%= b.author %></span>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <span class="list-item--label mdl-cell--hide-desktop">カテゴリ</span>
+          <span class="list-item--text">未取得</span>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <span class="list-item--label mdl-cell--hide-desktop">ステータス</span>
+          <span class="list-item--text"><%= b.status_i18n %></span>
+          <% if (b.in_use?) %>
+          <%= content_tag(
+                :span,
+                "(" + Rent.search(book_id_eq:b.id, ended_at_null:true).result.last.user.family_name + ")",
+                class:"list-itme--text"
+              )%>
+          <% end %>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <%= link_to "編集する", '#', class: "" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= will_paginate @books,
+                  previous_label: content_tag(:i, 'keyboard_arrow_left', class:"material-icons"),
+                  next_label: content_tag(:i, 'keyboard_arrow_right', class:"material-icons") %>

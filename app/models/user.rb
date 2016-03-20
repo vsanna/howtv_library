@@ -4,7 +4,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :rememberable, :trackable, :validatable,:recoverable#, :confirmable
 
-  enum role: %i(user admin) #
+  enum role: {
+    genenral: 0,
+    admin: 1,
+  }
 
   has_many :rents, dependent: :destroy
   has_many :comments, dependent: :destroy

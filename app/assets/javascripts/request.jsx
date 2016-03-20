@@ -3,7 +3,7 @@ var Vue = require('vue');
 
 $(() => {
 
-  if ( $('body').is('.pages') ){
+  if ( $('body').is('.pages, .books') ){
     var sendRequest = (type, body)=>{
       return $.ajax({
         'type': 'POST',

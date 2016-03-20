@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="title-section">
+    <h1 class="title-section--title">書籍一覧</h1>
+    <%= link_to "管理画面TOPに戻る", admin_root_path, class: "title-section--link" %>
+  </div>
+  <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+    <%= render partial:'book_list', locals:{books: @books} %>
+  </div>
+</div>
