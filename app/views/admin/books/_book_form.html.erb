@@ -1,0 +1,91 @@
+<div class="form--table <%= (mini) ? 'mini': nil %>">
+  <div class="form--body">
+    <%= form_for [:admin, book] do |f| %>
+      <div class="form--cell">
+        <%= f.label :title, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :title, class: "mdl-textfield__input", id: 'title' %>
+          <label class="mdl-textfield__label" for="title">title...</label>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :isbn10, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :isbn10, class: "mdl-textfield__input", id: 'isbn10' %>
+          <label class="mdl-textfield__label" for="isbn10">isbn10...</label>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :isbn13, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :isbn13, class: "mdl-textfield__input", id: 'isbn13' %>
+          <label class="mdl-textfield__label" for="isbn13">isbn13...</label>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :author, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :author, class: "mdl-textfield__input", id: 'author' %>
+          <label class="mdl-textfield__label" for="author">author...</label>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :category, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :category, class: "mdl-textfield__input", id: 'category' %>
+          <label class="mdl-textfield__label" for="category">category...</label>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :hires_image, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :hires_image, class: "mdl-textfield__input", id: 'hires_image' %>
+          <label class="mdl-textfield__label" for="hires_image">category...</label>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :large_image, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :large_image, class: "mdl-textfield__input", id: 'large_image' %>
+          <label class="mdl-textfield__label" for="large_image">large_image...</label>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :description, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :description, class: "mdl-textfield__input", id: 'description' %>
+          <label class="mdl-textfield__label" for="description">description...</label>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :url, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :url, class: "mdl-textfield__input", id: 'url' %>
+          <label class="mdl-textfield__label" for="url">url...</label>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :publisher, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :publisher, class: "mdl-textfield__input", id: 'publisher' %>
+          <label class="mdl-textfield__label" for="publisher">publisher...</label>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :published_at, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :published_at, class: "mdl-textfield__input", id: 'published_at' %>
+          <label class="mdl-textfield__label" for="published_at">published_at...</label>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :status, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :status, class: "mdl-textfield__input", id: 'status' %>
+          <label class="mdl-textfield__label" for="status">status...</label>
+        </div>
+      </div>
+      <%= f.submit class:"mdl-button form--submit mdl-button--colored" %>
+    <% end %>
+  </div>
+</div>

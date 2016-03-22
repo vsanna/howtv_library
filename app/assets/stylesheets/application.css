@@ -18,6 +18,7 @@
  *= require commons/modal
  *= require commons/request
  *= require commons/toast
+ *= require commons/forms
  *= require admin/pages
  *= require admin/books
  *= require layout

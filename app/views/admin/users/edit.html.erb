@@ -1,0 +1,9 @@
+<div class="container narrow">
+  <div class="title-section">
+    <h1 class="title-section--title">ユーザーを編集する</h1>
+    <%= link_to admin_users_path, class: "title-section--link" do %>
+         ユーザー一覧に戻る
+    <% end %>
+  </div>
+  <%= render partial:'user_form', locals:{user: @user, mini:false} %>
+</div>

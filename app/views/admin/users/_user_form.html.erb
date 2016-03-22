@@ -1,0 +1,35 @@
+<div class="form--table <%= (mini) ? 'mini': nil %>">
+  <div class="form--body">
+    <%= form_for [:admin, user] do |f| %>
+      <div class="form--cell">
+        <%= f.label :family_name, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :family_name, class: "mdl-textfield__input", id: 'family_name' %>
+          <label class="mdl-textfield__label" for="family_name">family_name...</label>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :given_name, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :given_name, class: "mdl-textfield__input", id: 'given_name' %>
+          <label class="mdl-textfield__label" for="given_name">given_name...</label>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :email, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.text_field :email, class: "mdl-textfield__input", id: 'email' %>
+          <label class="mdl-textfield__label" for="email">email...</label>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :role, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.select :role, User.roles, class: "mdl-textfield__input", id: 'role' %>
+        </div>
+      </div>
+
+      <%= f.submit class:"mdl-button form--submit mdl-button--colored" %>
+    <% end %>
+  </div>
+</div>

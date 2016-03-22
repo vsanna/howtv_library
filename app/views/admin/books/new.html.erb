@@ -1,0 +1,27 @@
+<div class="container narrow">
+  <div class="title-section">
+    <h1 class="title-section--title">本を追加する</h1>
+    <%= link_to admin_books_path, class: "title-section--link" do %>
+         書籍一覧に戻る
+    <% end %>
+  </div>
+  <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+  <div class="mdl-tabs__tab-bar">
+      <a href="#isbn" class="mdl-tabs__tab is-active">isbn</a>
+      <a href="#manual" class="mdl-tabs__tab">マニュアル</a>
+  </div>
+
+  <div class="mdl-tabs__panel is-active" id="isbn">
+    <div class="mdl-textfield mdl-js-textfield">
+      <textarea class="mdl-textfield__input" type="text" rows= "3" id="isbn-list" ></textarea>
+      <label class="mdl-textfield__label" for="isbn-list">ISBN10を改行で貼付け</label>
+    </div>
+    <div class="results">
+      <%= render partial:'book_form', locals:{book: @book, mini: true} %>
+    </div>
+  </div>
+  <div class="mdl-tabs__panel" id="manual">
+    <%= render partial:'book_form', locals:{book: @book, mini:false} %>
+  </div>
+</div>
+</div>

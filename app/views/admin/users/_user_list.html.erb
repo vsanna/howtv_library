@@ -1,0 +1,38 @@
+<div class="list">
+  <div class="mdl-grid list-header mdl-cell--hide-tablet mdl-cell--hide-phone">
+    <div class="mdl-cell mdl-cell--2-col">id</div>
+    <div class="mdl-cell mdl-cell--2-col">姓</div>
+    <div class="mdl-cell mdl-cell--2-col">名</div>
+    <div class="mdl-cell mdl-cell--2-col">email</div>
+    <div class="mdl-cell mdl-cell--4-col"></div>
+  </div>
+  <div class="list-body">
+    <% users.each do |user| %>
+      <div class="list-item mdl-grid">
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <span class="list-item--label mdl-cell--hide-desktop">タイトル</span>
+          <span class="list-item--text"><%= user.id %></span>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <span class="list-item--label mdl-cell--hide-desktop">姓</span>
+          <span class="list-item--text"><%= user.family_name %></span>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <span class="list-item--label mdl-cell--hide-desktop">名</span>
+          <span class="list-item--text"><%= user.given_name %></span>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <span class="list-item--label mdl-cell--hide-desktop">email</span>
+          <span class="list-item--text"><%= user.email %></span>
+        </div>
+        <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+          <%= link_to "編集する", edit_admin_user_path(user)%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= will_paginate @users,
+                  previous_label: content_tag(:i, 'keyboard_arrow_left', class:"material-icons"),
+                  next_label: content_tag(:i, 'keyboard_arrow_right', class:"material-icons") %>

@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
     admin: 1,
   }
 
+  validates :email, uniqueness:true
+  validates :email, presence:true
+
   has_many :rents, dependent: :destroy
   has_many :comments, dependent: :destroy
 end

@@ -1,0 +1,9 @@
+<div class="container narrow">
+  <div class="title-section">
+    <h1 class="title-section--title">本を編集する</h1>
+    <%= link_to admin_books_path, class: "title-section--link" do %>
+         書籍一覧に戻る
+    <% end %>
+  </div>
+  <%= render partial:'book_form', locals:{book: @book, mini:false} %>
+</div>
