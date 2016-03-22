@@ -55,7 +55,7 @@ config/secrets.yml
 .envrc
 
 node_modules/
-# app/assets/javascripts/build/* # 一旦保留
+app/assets/javascripts/build/* 
 
 config/settings.local.yml
 config/settings/*.local.yml
