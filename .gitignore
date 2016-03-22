@@ -48,14 +48,14 @@ config/secrets.yml
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
-
+.ruby-version
 
 # Ignore pow environment settings
 .powenv
 .envrc
 
 node_modules/
-app/assets/javascripts/build/* 
+app/assets/javascripts/build/*
 
 config/settings.local.yml
 config/settings/*.local.yml
