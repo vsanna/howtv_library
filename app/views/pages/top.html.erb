@@ -99,6 +99,9 @@
 .v-showModal-enter{
   animation: toggle-show 0.3s;
 }
+.v-showModal-enter .modal--body {
+  max-height:0px !important;
+}
 .v-showModal-leave{
   animation: toggle-hide 0.3s;
 }
@@ -109,4 +112,6 @@
     <%= render 'shared/modal_book_borrow' %>
     <%= render 'shared/modal_book_show' %>
   </div>
+
+  <div class="toast" v-bind:class="{'show': showToastMsg}">{{toastMsg}}</div>
 </div>

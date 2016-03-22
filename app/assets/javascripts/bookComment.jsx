@@ -15,7 +15,8 @@ var BookComment = Vue.extend({
       this.$dispatch('hide-modal');
     },
     'send': function(){
-      console.log('送信');
+      this.$dispatch('send-comment', this.book.id, this.comment);
+      this.comment = null;
     },
   },
 });

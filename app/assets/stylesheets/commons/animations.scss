@@ -1,5 +1,6 @@
 @keyframes toggle-show {
   0% { opacity:0; }
+  50% { opacity:1; }
   100% { opacity:1; }
 }
 @keyframes slide-down {
@@ -15,7 +16,10 @@
   100% { top:-600px; }
 }
 @keyframes bounce-in {
-  0% { transform: scale(0) }
+  0% {
+     opacity:1;
+     transform: scale(0)
+  }
   50% { transform: scale(1.5) }
   100% { transform: scale(1) }
 }

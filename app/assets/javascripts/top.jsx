@@ -41,6 +41,19 @@ $(() => {
     });
   }
 
+  var sendComment = (id, comment)=>{
+    console.log('fdas');
+    return $.ajax({
+      'type': 'POST',
+      'url': '/api/v1/comments',
+      'dataType': 'json',
+      'data': {
+        'book_id': id,
+        'comment': comment
+      }
+    });
+  }
+
   if ( $('body').is('.pages') ){
     var mypage =  new Vue({
       'el': $("#main").get(0),
@@ -51,19 +64,21 @@ $(() => {
         'book-return-box': BookReturnBox,
       },
       'data': {
+        'loading': false,
         'showModal': false,
         'showViewer': false,
         'showRentalBox': false,
         'showComment': false,
         'showReturnBox': false,
+        'showToastMsg': false,
         'currentBookId': null,
-        'loading': false,
         'book': {},
         'comments':[],
         'books': [],
         'page': 1,
         'total': 0,
         'has_next': true,
+        'toastMsg': null,
         'query': {
           'search_key': null,
         },
@@ -98,19 +113,28 @@ $(() => {
           })
         },
 
-        // modalまわり
+        // action周り
         'getBook': function(id){
-          if (this.currentBookId == id){ return; }
+          if (this.currentBookId == id){
+            this.loading = false;
+            return;
+          }
           this.book = {}; // clear
           getBook(id).done((data)=>{
             this.currentBookId = data.result.book.id;
             this.book = data.result.book;
             this.comments = data.result.comments;
+            this.loading = false;
           }).fail(()=>{
             alert('エラーが起きました。存在しない書籍です。');
+          }).always(()=>{
+            this.loading = false;
           })
         },
         'borrowBook': function(id){
+          if ( this.loading ){ return; }
+          this.loading = true;
+
           borrowBook(id).done((data)=>{
             alert(data.message);
             this.currentBookId = null; // 再読み込み
@@ -118,46 +142,80 @@ $(() => {
             this.hideModal();
           }).fail(()=>{
             alert('エラーが起きました。存在しない書籍です。');
+          }).always(()=>{
+            this.loading = false;
           })
         },
         'returnBook': function(id){
+          if ( this.loading ){ return; }
+          this.loading = true;
+
           returnBook(id).done((data)=>{
-            alert(data.message);
             this.hideModal();
-            location.reload();
+            this.openComment(id);
+            this.showToaseMessage(data.message);
           }).fail(()=>{
             alert('エラーが起きました。存在しない書籍です。');
+          }).always(()=>{
+            this.loading = false;
           })
         },
+        'sendComment': function(id, comment){
+          if ( this.loading ){ return; }
+          this.loading = true;
+          console.log('asdf');
+          sendComment(id, comment).done((data)=>{
+            this.hideModal();
+            this.showToaseMessage(data.message);
+          }).fail(()=>{
+            alert('エラーが起きました。存在しない書籍です。');
+          }).always(()=>{
+            this.loading = false;
+          })
+        },
+        'stockBook': function(id){
+        },
         'openViewer': function(id){
+          this.loading = true;
           this.showModal = true;
           this.showViewer = true;
           this.getBook(id);
         },
         'openRentalBox': function(id){
+          this.loading = true;
           this.showModal = true;
           this.showRentalBox = true;
           this.getBook(id);
         },
         'openReturnBox': function(id){
+          this.loading = true;
           this.showModal = true;
           this.showReturnBox = true;
           this.getBook(id);
         },
         'openComment': function(id){
+          this.loading = true;
           this.showModal = true;
           this.showComment = true;
           this.getBook(id);
         },
-        'stockBook': function(id){
-        },
+
+        // 演出
         'hideModal': function(){
+          this.loading = false;
           this.showModal = false;
           this.showViewer = false;
           this.showRentalBox = false;
           this.showReturnBox = false;
           this.showComment = false;
-        }
+        },
+        'showToaseMessage': function(msg){
+          this.toastMsg = msg;
+          this.showToastMsg = true;
+          setTimeout(()=>{
+            this.showToastMsg = false;
+          }, 3000)
+        },
       },
       'events' : {
         'hide-modal': function () {
@@ -175,6 +233,9 @@ $(() => {
         },
         'return-book': function(id){
           this.returnBook(id);
+        },
+        'send-comment': function(id, comment){
+          this.sendComment(id,comment);
         }
       }
     })

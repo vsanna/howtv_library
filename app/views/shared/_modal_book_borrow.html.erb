@@ -25,7 +25,7 @@
         <i class="material-icons">close</i>
         <span class="button-label">閉じる</span>
       </button>
-      <button class="book-button book-button--ok book-button--colored" v-bind:disabled="book.status != 0" v-on:click="borrowBook(book.id)">
+      <button class="book-button book-button--ok book-button--colored" v-bind:disabled="(book.status != 0 || loading)" v-on:click="borrowBook(book.id)">
         <i class="material-icons">done</i>
         <span class="button-label">借りる</span>
       </button>

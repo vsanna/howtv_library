@@ -177,7 +177,7 @@ body.pages{
       }
     }
     &.modal .modal--body {
-      height: calc(100% - 43px - 52px) !important;
+      // height: calc(100% - 43px - 52px) !important;
     }
     .modal--footer {
       padding: 0;
@@ -201,6 +201,7 @@ body.pages{
     .comment-input {
         padding: 0;
         margin-top: 16px;
+        margin-bottom: 16px;
         .mdl-textfield__label {
           top: inherit;
           ::after {

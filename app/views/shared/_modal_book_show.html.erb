@@ -47,7 +47,7 @@
         <span class="button-label">ストック</span>
       </button>
       <div class="mdl-tooltip" for="book_stock_in_viewer">comming soon...</div>
-      <button class="book-button book-button--borrow book-button--colored" v-bind:disabled="book.status != 0" v-on:click="borrow()">
+      <button class="book-button book-button--borrow book-button--colored" v-bind:disabled="book.status != 0 || loading" v-on:click="borrow()">
         <i class="material-icons">done</i>
         <span class="button-label">借りる</span>
       </button>

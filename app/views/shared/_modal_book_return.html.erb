@@ -11,7 +11,7 @@
     <div class="modal--body">
       <div class="book-info mdl-grid">
         <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--4-phone">
-          <img src="https://thumbsplus.tutsplus.com/uploads/users/30/posts/24633/preview_image/mdl-cards.png?height=300&amp;width=300" alt="" class="book-info--img">
+          <img v-bind:src="book.image" class="book-info--img">
         </div>
         <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--4-phone">
           <div class="book-info--title">{{book.title}}</div>
@@ -27,7 +27,7 @@
         <i class="material-icons">close</i>
         <span class="button-label">閉じる</span>
       </button>
-      <button class="book-button book-button--ok book-button--colored" v-on:click="returnBook()">
+      <button class="book-button book-button--ok book-button--colored" v-on:click="returnBook()" v-bind:disabled="loading">
         <i class="material-icons">reply</i>
         <span class="button-label">返却する</span>
       </button>

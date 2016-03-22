@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       post '/books/:id/borrow', to: 'books#borrow'
       post '/books/:id/return', to: 'books#return'
       post '/request', to: 'requests#create'
+      post '/comments', to:'comments#create'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

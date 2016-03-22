@@ -11,7 +11,7 @@
     <div class="modal--body">
       <div class="book-info mdl-grid">
         <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--4-phone">
-          <img src="https://thumbsplus.tutsplus.com/uploads/users/30/posts/24633/preview_image/mdl-cards.png?height=300&amp;width=300" alt="" class="book-info--img">
+          <img v-bind:src="book.image" alt="" class="book-info--img">
         </div>
         <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--4-phone">
           <div class="book-info--title">{{book.title}}</div>
@@ -24,23 +24,23 @@
       <div class="book-info">
         <form action="#">
           <ul class="book-info--tags">
-            <li class="tag">ruby</li>
-            <li class="tag">エクセルの次の本</li>
-            <li class="tag">エクセルの次の本</li>
-            <li class="tag">エクセルの次の本</li>
+            <li class="tag">comming</li>
+            <li class="tag">soon...</li>
+            <!-- <li class="tag">エクセルの次の本</li>
+            <li class="tag">エクセルの次の本</li> -->
           </ul>
-          <div class="tag-input mdl-textfield mdl-js-textfield is-upgraded">
+          <!-- <div class="tag-input mdl-textfield mdl-js-textfield is-upgraded">
             <input class="mdl-textfield__input" type="text" id="tag-input">
             <label class="mdl-textfield__label" for="tag-input">タグをつける</label>
-          </div>
-          <ul class="book-suggest-list">
+          </div> -->
+          <!-- <ul class="book-suggest-list">
             <li>ruby</li>
             <li>エクセルの次の本</li>
             <li>エクセルの次の本</li>
             <li>エクセルの次の本</li>
-          </ul>
+          </ul> -->
           <div class="comment-input mdl-textfield mdl-js-textfield is-upgraded">
-            <textarea class="mdl-textfield__input" type="text" rows="3" id="comment-input"></textarea>
+            <textarea v-model="comment" class="mdl-textfield__input" type="text" rows="3" id="comment-input"></textarea>
             <label class="mdl-textfield__label" for="comment-input">感想をのこす</label>
           </div>
         </form>
@@ -51,7 +51,7 @@
         <i class="material-icons">close</i>
         <span class="button-label">閉じる</span>
       </button>
-      <button class="book-button book-button--ok book-button--colored">
+      <button class="book-button book-button--ok book-button--colored" v-bind:disabled="!comment || loading" v-on:click="send()">
         <i class="material-icons">done</i>
         <span class="button-label">送信する</span>
       </button>

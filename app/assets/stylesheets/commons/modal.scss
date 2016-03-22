@@ -36,6 +36,7 @@
         }
         .modal--body {
           max-height: 350px;
+          transition:max-height 0.3s;
           height: calc(100% - 43px - 40px);
           overflow: scroll;
           @media #{$width-mobile}{ padding: 0 16px; }
