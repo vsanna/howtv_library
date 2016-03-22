@@ -12,12 +12,14 @@ class Api::V1::RequestsController < ApplicationController
       @message = 'ご意見ありがとうございます!slackでもご意見お待ちしております!'
 
       text = <<TEXT
+```
 リクエストが来ました。
 
 リクエストタイプ: #{req.request_type_i18n}
 送信者: #{req.user.family_name} #{req.user.given_name}
 内容:
 #{req.body}
+```
 TEXT
       Slack.chat_postMessage(
         text: text,
