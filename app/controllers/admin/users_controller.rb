@@ -35,4 +35,9 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
   end
+
+  private
+  def user_params
+    params.require(:user).permit(:id. :family_name, :given_name, :email, :role)
+  end
 end

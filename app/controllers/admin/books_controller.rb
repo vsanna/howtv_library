@@ -38,8 +38,9 @@ class Admin::BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:isbn10,:isbn13,:title,:author,:published_at,:publisher,:status,:hires_image,:large_image,:description,:url,:categor)
+    params.require(:book).permit(:isbn10,:isbn13,:title,:author,:published_at,:publisher,:status,:hires_image,:large_image,:description,:url,:category)
   end
+
   def authenticate_admin!
     if !user_signed_in? || !current_user.admin?
       redirect_to root_path, notice: 'このページにはアクセスできません'
