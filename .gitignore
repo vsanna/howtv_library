@@ -55,8 +55,8 @@ config/secrets.yml
 .envrc
 
 node_modules/
-app/assets/javascripts/build/*
-
+app/assets/javascripts/build/*.js
+app/assets/javascripts/build
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
