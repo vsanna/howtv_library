@@ -1,6 +1,8 @@
 会社の書籍管理ツールとして土日につくったもの。
 バーコードリーダーでISBNコードを読み込んだ後、ソレを元にamazonで書籍情報を取得してDBに突っ込んでいる。
 
+![barcode-reader](./images/barcode_reader.png)
+
 TODO: 完成させたものはprivateレポジトリに入れちゃっているのであとで管理どうするか相談
 
 
