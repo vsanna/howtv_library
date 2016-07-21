@@ -17,14 +17,18 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  # 一般ユーザー用route
+  get '/mypage', to: 'pages#mypage'
+
+
+  # admin用route
   namespace :admin do
     root 'pages#top'
     resources :books
     resources :users
   end
 
-  get '/mypage', to: 'pages#mypage'
-
+  # api用route
   namespace :api, { format: 'json' } do
     namespace :v1 do
       resources :books, constraints: {id: /\d*/}, only: [:show]

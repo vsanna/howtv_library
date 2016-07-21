@@ -34,6 +34,7 @@
         </div>
         <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
           <%= link_to "編集する", edit_admin_book_path(b)%>
+          <%= link_to "削除する", admin_book_path(b), method: :delete, data:{confirm:'本当に削除しますか？'}%>
         </div>
       </div>
     <% end %>

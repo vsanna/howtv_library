@@ -3,6 +3,11 @@
     margin-bottom: 32px;
     .form--cell {
         padding: 8px 0;
+        .form--cell--alert {
+            display: block;
+            font-size: 0.8rem;
+            color: #BF0000;
+        }
     }
     .form--label {
         font-size: 0.9rem;

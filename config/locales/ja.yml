@@ -219,3 +219,7 @@ ja:
         bug_report: バグ報告
         idea: 機能アイデア
         thanks: ねぎらい
+    user:
+      role:
+        general: 一般利用者
+        admin: 管理者

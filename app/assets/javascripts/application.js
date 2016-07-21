@@ -13,3 +13,5 @@
 // webpackに従い、main.jsで各jsを読込 -> build/main.jsに書き出し -> このmanifestで読込
 //
 //= require build/main
+//= require jquery
+//= require jquery_ujs

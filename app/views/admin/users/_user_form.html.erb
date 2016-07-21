@@ -6,6 +6,7 @@
         <div class="mdl-textfield mdl-js-textfield">
           <%= f.text_field :family_name, class: "mdl-textfield__input", id: 'family_name' %>
           <label class="mdl-textfield__label" for="family_name">family_name...</label>
+          <%= form__cell__alert(user, :family_name) %>
         </div>
       </div>
       <div class="form--cell">
@@ -13,6 +14,7 @@
         <div class="mdl-textfield mdl-js-textfield">
           <%= f.text_field :given_name, class: "mdl-textfield__input", id: 'given_name' %>
           <label class="mdl-textfield__label" for="given_name">given_name...</label>
+          <%= form__cell__alert(user, :given_name) %>
         </div>
       </div>
       <div class="form--cell">
@@ -20,12 +22,30 @@
         <div class="mdl-textfield mdl-js-textfield">
           <%= f.text_field :email, class: "mdl-textfield__input", id: 'email' %>
           <label class="mdl-textfield__label" for="email">email...</label>
+          <%= form__cell__alert(user, :email) %>
         </div>
       </div>
       <div class="form--cell">
         <%= f.label :role, class:"form--label" %>
         <div class="mdl-textfield mdl-js-textfield">
-          <%= f.select :role, User.roles, class: "mdl-textfield__input", id: 'role' %>
+          <%= f.select :role, User.roles_i18n.invert, class: "mdl-textfield__input", id: 'role' %>
+          <%= form__cell__alert(user, :role) %>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :password, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.password_field :password, class: "mdl-textfield__input", id: 'password' %>
+          <label class="mdl-textfield__label" for="password">password...</label>
+          <%= form__cell__alert(user, :password) %>
+        </div>
+      </div>
+      <div class="form--cell">
+        <%= f.label :password_confirmation, class:"form--label" %>
+        <div class="mdl-textfield mdl-js-textfield">
+          <%= f.password_field :password_confirmation, class: "mdl-textfield__input", id: 'password_confirmation' %>
+          <label class="mdl-textfield__label" for="password_confirmation">password_confirmation...</label>
+          <%= form__cell__alert(user, :password_confirmation) %>
         </div>
       </div>
 

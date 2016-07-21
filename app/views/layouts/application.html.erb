@@ -50,7 +50,7 @@
       <%= link_to 'アカウント設定', passwords_edit_path, class:'mdl-navigation__link' %>
       <%= link_to "ログアウト", sign_out_path, method: :delete, class:'mdl-navigation__link' %>
       <% if current_user.admin? %>
-        <%= link_to "管理画面", admin_root_path, method: :delete, class:'mdl-navigation__link' %>
+        <%= link_to "管理画面", admin_root_path, class:'mdl-navigation__link' %>
       <% end %>
     </nav>
   </div>
@@ -85,10 +85,10 @@
           <div class="panel--form">
             <div class="mdl-textfield mdl-js-textfield">
               <select class="mdl-textfield__input" v-model="query.type">
-                <option value="1">書籍のリクエスト</option>
-                <option value="2">バグ報告</option>
-                <option value="3">機能アイデア</option>
-                <option value="4">ねぎらい</option>
+                <option value="0">書籍のリクエスト</option>
+                <option value="1">バグ報告</option>
+                <option value="2">機能アイデア</option>
+                <option value="3">ねぎらい</option>
               </select>
             </div>
             <div class="mdl-textfield mdl-js-textfield">

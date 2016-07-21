@@ -5,12 +5,15 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable,:recoverable#, :confirmable
 
   enum role: {
-    genenral: 0,
+    general: 0,
     admin: 1,
   }
 
   validates :email, uniqueness:true
-  validates :email, presence:true
+  validates :password_confirmation, presence:true
+  validates :family_name, presence:true
+  validates :given_name, presence:true
+  validates :role, presence:true
 
   has_many :rents, dependent: :destroy
   has_many :comments, dependent: :destroy

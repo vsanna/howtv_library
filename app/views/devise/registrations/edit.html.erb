@@ -1,39 +1,64 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="container narrow">
+  <div class="title-section">
+    <h1 class="title-section--title">プロフィールを変更する</h1>
+    <%= link_to root_path, class: "title-section--link" do %>
+         書籍一覧に戻る
+    <% end %>
+  </div>
+  <div class="form--table">
+    <div class="form--body">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <div class="form--cell">
+          <%= f.label :family_name, class:"form--label" %>
+          <div class="mdl-textfield mdl-js-textfield">
+            <%= f.text_field :family_name, class: "mdl-textfield__input", id: 'family_name' %>
+            <label class="mdl-textfield__label" for="family_name">family_name...</label>
+            <%= form__cell__alert(resource, :family_name) %>
+          </div>
+        </div>
+        <div class="form--cell">
+          <%= f.label :given_name, class:"form--label" %>
+          <div class="mdl-textfield mdl-js-textfield">
+            <%= f.text_field :given_name, class: "mdl-textfield__input", id: 'given_name' %>
+            <label class="mdl-textfield__label" for="given_name">given_name...</label>
+            <%= form__cell__alert(resource, :given_name) %>
+          </div>
+        </div>
+        <div class="form--cell">
+          <%= f.label :email, class:"form--label" %>
+          <div class="mdl-textfield mdl-js-textfield">
+            <%= f.text_field :email, class: "mdl-textfield__input", id: 'email' %>
+            <label class="mdl-textfield__label" for="email">email...</label>
+            <%= form__cell__alert(resource, :email) %>
+          </div>
+        </div>
+        <div class="form--cell">
+          <%= f.label :role, class:"form--label" %>
+          <div class="mdl-textfield mdl-js-textfield">
+            <%= f.select :role, User.roles_i18n.invert, class: "mdl-textfield__input", id: 'role' %>
+            <%= form__cell__alert(resource, :role) %>
+          </div>
+        </div>
+        <div class="form--cell">
+          <%= f.label :password, class:"form--label" %>
+          <div class="mdl-textfield mdl-js-textfield">
+            <%= f.password_field :password, class: "mdl-textfield__input", id: 'password' %>
+            <label class="mdl-textfield__label" for="password">password...</label>
+            <%= form__cell__alert(resource, :password) %>
+          </div>
+        </div>
+        <div class="form--cell">
+          <%= f.label :password_confirmation, class:"form--label" %>
+          <div class="mdl-textfield mdl-js-textfield">
+            <%= f.password_field :password_confirmation, class: "mdl-textfield__input", id: 'password_confirmation' %>
+            <label class="mdl-textfield__label" for="password_confirmation">password_confirmation...</label>
+            <%= form__cell__alert(resource, :password_confirmation) %>
+          </div>
+        </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+        <%= f.submit class:"mdl-button form--submit mdl-button--colored" %>
+      <% end %>
+    </div>
   </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-<!--
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%#= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p> -->
-
-<%= link_to "Back", :back %>
+</div>

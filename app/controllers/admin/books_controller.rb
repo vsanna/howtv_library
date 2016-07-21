@@ -9,9 +9,20 @@ class Admin::BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new(book_params)
+    # isbnを一括で取得
+    isbn_code_set = params[:isbn]
 
-    if @book.save
+    # isbnを元にamazon apiから書籍情報を一括取得
+    # Bookインスタンスのarrayとして取得
+    books = AmazonApi.getBooks(isbn_code_set)
+
+    # それぞれurlからスクレイプしたカテゴリを取得
+    books.each do |b|
+      url = b.url
+      b.categories << AmazonApi.getCategoryFromAmazon(b.url)
+    end
+
+    if books.save
       redirect_to admin_root_path, notice:'保存できました'
     else
       render 'new', alert: '保存できませんでした'
@@ -33,6 +44,9 @@ class Admin::BooksController < ApplicationController
   end
 
   def destroy
+    @book = Book.find(params[:id])
+    @book.destroy
+    redirect_to admin_books_path, notice: "#{@book.title}を削除しました"
   end
 
   private

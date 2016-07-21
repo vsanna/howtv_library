@@ -1,7 +1,7 @@
 class Api::V1::BooksController < ApplicationController
   before_filter :authenticate_user!
   protect_from_forgery except: [:borrow, :return]
-
+  include NoticeToSlack
 
   def index_or_search
     if params[:query][:search_key].blank?
@@ -43,22 +43,7 @@ class Api::V1::BooksController < ApplicationController
     if rent.save
       Book.find(book_id).in_use!
       @message = '貸し出ししました。'
-
-      text = <<TEXT
-```
-書籍が貸し出されました。
-
-書籍名: #{rent.book.title}
-返却日: #{rent.end_at}
-借り主: #{rent.user.family_name}
-```
-TEXT
-      Slack.chat_postMessage(
-        text: text,
-        channel: ENV['SLACK_TEST'],
-        username: 'request',
-        icon_emoji: ':tada:'
-      )
+      NoticeToSlack.on_book_borrow rent
     else
       @message = '貸出に失敗しました。'
     end
@@ -70,22 +55,7 @@ TEXT
     rent = Rent.where(user_id: current_user.id, book_id: book.id, ended_at: nil).last
     rent.returned!
     @message = '返却しました。'
-
-    text = <<TEXT
-```
-書籍が返却されました。
-
-書籍名: #{rent.book.title}
-返却予定日: #{rent.end_at}
-借り主: #{rent.user.family_name}
-```
-TEXT
-    Slack.chat_postMessage(
-      text: text,
-      channel: ENV['SLACK_TEST'],
-      username: 'request',
-      icon_emoji: ':tada:'
-    )
+    NoticeToSlack.on_book_return rent
   end
 
   private

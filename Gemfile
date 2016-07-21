@@ -50,6 +50,7 @@ gem 'slack-api'
 gem 'whenever'
 gem 'enum_help'
 
+gem 'mechanize'
 
 
 group :development, :test do
